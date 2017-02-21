@@ -18,8 +18,8 @@
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
-#ifndef _74HC595_H_
-#define _74HC595_H_
+#ifndef _GPIO_H_
+#define _GPIO_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,30 +34,26 @@ extern "C" {
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-#define IO_EX_595_BIT0_DAC714_CLR				0
-#define IO_EX_595_BIT1_ADS7805_BYTE				1
-#define IO_EX_595_BIT2_ADS7805_R_C				2
-#define IO_EX_595_BIT3_ADS7805_CS				3
-#define IO_EX_595_BIT4_TLC5615_CS				4
-#define IO_EX_595_BIT5_SN74F575_SNCLK			5
-#define IO_EX_595_BIT6_RESERVED_BUSY		    6
-#define IO_EX_595_BIT7_RESERVED_BUSY			7
+#define GPIO_OUTPUT_DAC714_AA0          2
+#define GPIO_OUTPUT_DAC714_AA1          3
+#define GPIO_OUTPUT_595_DS              5
+#define GPIO_OUTPUT_595_STCP            6
+#define GPIO_OUTPUT_595_SHCP            13
+#define GPIO_OUTPUT_SPI_SIN             10
+#define GPIO_OUTPUT_SPI_SCLK            11
 
-#define IO_EX_595_BIT8_SN74F575_PTD0			8
-#define IO_EX_595_BIT9_SN74F575_PTD1			9
-#define IO_EX_595_BIT10_SN74F575_PTD2			10
-#define IO_EX_595_BIT11_SN74F575_PTD3			11
-#define IO_EX_595_BIT12_SN74F575_PTD4			12
-#define IO_EX_595_BIT13_SN74F575_PTD5			13
-#define IO_EX_595_BIT14_SN74F575_PTD6			14
-#define IO_EX_595_BIT15_SN74F575_PTD7			15
+#define GPIO_INPUT_AD7715_DOUT          17
+#define GPIO_INPUT_ADS7805_A0           18
+#define GPIO_INPUT_ADS7805_A1           23
+#define GPIO_INPUT_ADS7805_A2           24
+#define GPIO_INPUT_ADS7805_A3           25
+#define GPIO_INPUT_ADS7805_A4           12
+#define GPIO_INPUT_ADS7805_A5           16
+#define GPIO_INPUT_ADS7805_A6           20
+#define GPIO_INPUT_ADS7805_A7           21
 
-#define IO_EX_595_DATA_LEN					    16
-
-// #define IO_EX_595_PIN_DS					    5
-// #define IO_EX_595_PIN_STCP					    6
-// #define IO_EX_595_PIN_SHCP					    13
-
+#define HIGH                            1
+#define LOW                             0
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here

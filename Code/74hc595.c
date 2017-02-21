@@ -21,15 +21,23 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-#include <stdint.h>
+#include <pigpio.h>
+#include "types.h"
 
-#include "wiringPi.h"
-#include "wiringShift.h"
+#include "74hc595.h"
+
 
 /*****************************************************************************
 * Define section
 * add all #define here
 *****************************************************************************/
+#define   HC_DATA_H()        gpioWrite(GPIO_OUTPUT_595_DS,       HIGH)   // data line output high
+#define   HC_DATA_L()        gpioWrite(GPIO_OUTPUT_595_DS,       LOW)   //date line output low
+#define   HC_LANCH_H()       gpioWrite(GPIO_OUTPUT_595_STCP, HIGH)   // rck output high
+#define   HC_LANCH_L()       gpioWrite(GPIO_OUTPUT_595_STCP, LOW)  // rck output low
+#define   HC_CLOCK_H()       gpioWrite(GPIO_OUTPUT_595_SHCP, HIGH)   // sck output high
+#define   HC_CLOCK_L()       gpioWrite(GPIO_OUTPUT_595_SHCP, LOW)  // sck output low
+
 
 /****************************************************************************
 * ADT section
@@ -50,6 +58,7 @@
 * e.g.
 *	int8_t foo;
 ****************************************************************************/
+uint16_t u16ExIOBuf;
 
 
 /*****************************************************************************
@@ -59,6 +68,7 @@
 * e.g.
 *	static uint8_t ufoo;
 *****************************************************************************/
+
 
 /* function body */
 
@@ -70,5 +80,37 @@
 * Return:
 *		what does this function returned?
 *****************************************************************************/
+void set595BufByBit(uint8_t index)
+{
+    u16ExIOBuf |= 0x0001 << index;
+}
+void clr595BufByBit(uint8_t index)
+{
+    u16ExIOBuf &= ~(0x0001 << index);
+}
+void update595Output(void)
+{
+    uint8_t i;
+    uint16_t temp;
+    temp = u16ExIOBuf;
+    HC_LANCH_L; //latch open
+    HC_CLOCK_L;
+    for(i = 0; i < IO_EX_595_DATA_LEN; i++){
+        if(temp & 0x0001){
+            HC_DATA_H;
+        }
+        else{
+            HC_DATA_L;
+        }
+        HC_CLOCK_H;
+        usleep(10);
+        HC_CLOCK_L;
+        temp >>= 1;
+    }
+    HC_LANCH_H;
+    usleep(10);
+    HC_LANCH_L;
+}
+
 
 /********************************End Of File********************************/
