@@ -51,6 +51,13 @@ extern "C" {
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+void ads7805StartConversion(void);//
+void ads7805StartOutputData(void);
+uint8_t ads7805ConversionStatus(void);
+uint16_t ads7805GetData(void);
+
+
+
 
 #ifdef __cplusplus
 }

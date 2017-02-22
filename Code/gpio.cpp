@@ -62,7 +62,45 @@ gpio_read_t gpio_read[MAX_GPIO_INPUT] = {
 * e.g.
 *	int8_t foo;
 ****************************************************************************/
+#define GPIO_OUTPUT_DAC714_AA0          2
+#define GPIO_OUTPUT_DAC714_AA1          3
+#define GPIO_OUTPUT_595_DS              5
+#define GPIO_OUTPUT_595_STCP            6
+#define GPIO_OUTPUT_595_SHCP            13
+#define GPIO_OUTPUT_SPI_SIN             10
+#define GPIO_OUTPUT_SPI_SCLK            11
 
+#define GPIO_INPUT_AD7715_DOUT          17
+#define GPIO_INPUT_ADS7805_A0           18
+#define GPIO_INPUT_ADS7805_A1           23
+#define GPIO_INPUT_ADS7805_A2           24
+#define GPIO_INPUT_ADS7805_A3           25
+#define GPIO_INPUT_ADS7805_A4           12
+#define GPIO_INPUT_ADS7805_A5           16
+#define GPIO_INPUT_ADS7805_A6           20
+#define GPIO_INPUT_ADS7805_A7           21
+#define GPIO_INPUT_ADS7805_BUSY         21//TBD
+
+const gpio_t raspiGpio[RASPI_GPIO_SIZE] = {
+{GPIO_OUTPUT_DAC714_AA0,        OUTPUT,         LOW},
+{GPIO_OUTPUT_DAC714_AA1,        OUTPUT,         LOW},
+{GPIO_OUTPUT_595_DS,            OUTPUT,         LOW},
+{GPIO_OUTPUT_595_STCP,          OUTPUT,         LOW},
+{GPIO_OUTPUT_595_SHCP,          OUTPUT,         LOW},
+{GPIO_OUTPUT_SPI_SIN,           OUTPUT,         LOW},
+{GPIO_OUTPUT_SPI_SCLK,          OUTPUT,         LOW},
+
+{GPIO_INPUT_AD7715_DOUT,        INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A0,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A1,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A2,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A3,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A4,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A5,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A6,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_A7,         INPUT,          LOW},
+{GPIO_INPUT_ADS7805_BUSY,       INPUT,          LOW}
+};
 /*****************************************************************************
 * Global variables section - Local
 * define global variables(will be refered only in this file) here,

@@ -51,19 +51,51 @@ extern "C" {
 #define GPIO_INPUT_ADS7805_A5           16
 #define GPIO_INPUT_ADS7805_A6           20
 #define GPIO_INPUT_ADS7805_A7           21
+#define GPIO_INPUT_ADS7805_BUSY         21//TBD
+
+#define RASPI_GPIO_SIZE               (GPIO_INDEX_TOTAL)
 
 #define HIGH                            1
 #define LOW                             0
+#define OUTPUT                          1
+#define INPUT                           0
+
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here
 ***************************************************************************/
+typedef struct{
+    uint8_t gpio;
+    uint8_t dir;
+    uint8_t default;
+}gpio_t;
 
+enum{
+ GPIO_INDEX_DAC714_AA0 = 0,
+ GPIO_INDEX_DAC714_AA1,
+ GPIO_INDEX_595_DS    ,
+ GPIO_INDEX_595_STCP   ,
+ GPIO_INDEX_595_SHCP   ,
+ GPIO_INDEX_SPI_SIN  ,
+ GPIO_INDEX_SPI_SCLK   ,
 
+ GPIO_INDEX_AD7715_DOUT  ,
+ GPIO_INDEX_ADS7805_A0   ,
+ GPIO_INDEX_ADS7805_A1   ,
+ GPIO_INDEX_ADS7805_A2   ,
+ GPIO_INDEX_ADS7805_A3  ,
+ GPIO_INDEX_ADS7805_A4  ,
+ GPIO_INDEX_ADS7805_A5   ,
+ GPIO_INDEX_ADS7805_A6    ,
+ GPIO_INDEX_ADS7805_A7     ,
+ GPIO_INDEX_ADS7805_BUSY   ,
+ GPIO_INDEX_TOTAL
+
+};
 /****************************************************************************
 *  extern variable declaration section
 ***************************************************************************/
-
+extern const gpio_t raspiGpio[RASPI_GPIO_SIZE];
 
 /****************************************************************************
 *  section

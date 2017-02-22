@@ -33,13 +33,7 @@
 * ADT section
 *	add definition of user defined Data Type that only be used in this file  here
 ***************************************************************************/
-enum{
-    ADS7805STATE_IDLE = 0,
-    ADS7805STATE_START_CONV,
-    ADS7805STATE_CHECK_BUSY,
-    ADS7805STATE_OUTPUTDATA,
-    ADS7805STATE_GETDATA
-}
+
 
 /******************************************************************************
 * Function prototype section
@@ -54,7 +48,6 @@ enum{
 * e.g.
 *	int8_t foo;
 ****************************************************************************/
-uint8_t ads7805State = 0;
 
 /*****************************************************************************
 * Global variables section - Local
@@ -74,85 +67,5 @@ uint8_t ads7805State = 0;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-void ads7805StartConversion(void)//
-{
-    clr595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay low
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
-    update595Output();
-    
-    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc falling edge
-    update595Output();
-    // usleep(1);
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
-    update595Output();
-}
-/* when busy is high */
-void ads7805StartOutputData(void)
-{
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
-    set595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay high
-    update595Output();
-    
-    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//cs falling edge
-    update595Output();
-    // usleep(1);
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
-    update595Output();
-}
-uint8_t ads7805ConversionStatus(void)
-{
-    return gpioRead(GPIO_INPUT_ADS7805_BUSY);//0:busy, 1:ok
-}
-
-uint16_t ads7805GetData(void)
-{
-    uint8_t idx;
-    uint16_t temp = 0;
-    clr595BufByBit(IO_EX_595_BIT1_ADS7805_BYTE);//BYTE stay low
-    update595Output();
-    for(idx = GPIO_INDEX_ADS7805_A7; idx >= GPIO_INDEX_ADS7805_A0; idx--){
-        temp |= gpioRead(raspiGpio[idx].gpio);
-        temp <<= 1;
-    }
-    
-    set595BufByBit(IO_EX_595_BIT1_ADS7805_BYTE);//BYTE stay high
-    update595Output();
-    for(idx = GPIO_INDEX_ADS7805_A7; idx >= GPIO_INDEX_ADS7805_A0; idx--){
-        temp |= gpioRead(raspiGpio[idx].gpio);
-        temp <<= 1;
-    }
-    return temp;
-}
-
-void ads7805StateUpdate(void)
-{
-    switch(ads7805State){
-    case ADS7805STATE_IDLE  :
-    
-    break;
-    
-    case ADS7805STATE_START_CONV:
-        ads7805StartConversion();
-        ads7805State = ADS7805STATE_CHECK_BUSY;
-    break;
-    case ADS7805STATE_CHECK_BUSY:
-        if(ads7805ConversionStatus()){
-            ads7805State = ADS7805STATE_OUTPUTDATA;
-        }
-    break;
-    case ADS7805STATE_OUTPUTDATA:
-        ads7805StartOutputData();
-        ads7805State = ADS7805STATE_GETDATA;
-    break;
-    case ADS7805STATE_GETDATA
-        ads7805GetData();
-        ads7805State = ADS7805STATE_IDLE;
-    break;
-    
-    
-    default:break;
-    }
-
-}
 
 /********************************End Of File********************************/
