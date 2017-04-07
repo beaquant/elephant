@@ -58,6 +58,10 @@ extern "C" {
 // #define IO_EX_595_PIN_STCP					    6
 // #define IO_EX_595_PIN_SHCP					    13
 
+#define setIoRefresh(index)			\
+				set595BufByBit(index);update595Output()
+#define clrIoRefresh(index)			\
+				clr595BufByBit(index);update595Output()
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here

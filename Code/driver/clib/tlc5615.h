@@ -1,11 +1,10 @@
-
 /*****************************************************************************
 *
 *	Copyright(c) 2017-2020 Author(Zhihao). As an unpublished work
 *	All rights reserved.
 *
 *	Description:
-*        Provides an SPI based interface to a DAC714 DACs with cascaded
+*        Provides an SPI based interface to 2 TLC5615 DACs with cascaded
 *        serial bus connection with synchronous update.
 *
 *	$URL: 		$
@@ -19,8 +18,8 @@
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
-#ifndef _DAC714_H_
-#define _DAC714_H_
+#ifndef _TLC5615_H_
+#define _TLC5615_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,6 +51,7 @@ extern "C" {
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+
 
 
 

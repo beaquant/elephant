@@ -21,8 +21,8 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-#include "gpio.h"
-#include "dac714.h"
+#include "74hc595.h"
+
 
 
 /*****************************************************************************
@@ -59,20 +59,33 @@
 *****************************************************************************/
 
 /* function body */
-void dac714_init(void)
+
+/*****************************************************************************
+* Description:
+*		add funtion description here
+* Parameters:
+*		description for each argument, new argument starts at new line
+* Return:
+*		what does this function returned?
+*****************************************************************************/
+void tlc5615_init(void)
 {
 	
 }
-void dac714_set(uint16_t data)
+
+void tlc5615_set(uint16_t data_a, uint16_t data_b)
 {
 	uint8_t byte0, byte1;
-    gpioWrite(GPIO_OUTPUT_DAC714_AA0,    LOW);
-	byte0 = (data >> 8);
-	byte1 = data & 0xFF;
+	clrIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
+	byte0 = (data_b >> 8);
+	byte1 = data_b & 0xFF;
 	SPI.transfer(byte0);
 	SPI.transfer(byte1);
-	gpioWrite(GPIO_OUTPUT_DAC714_AA0, HIGH);
-
-	gpioWrite(GPIO_OUTPUT_DAC714_AA1, LOW);
-	gpioWrite(GPIO_OUTPUT_DAC714_AA1, HIGH);
+	byte0 = (data_a >> 8);
+	byte1 = data_a & 0xFF;
+	SPI.transfer(byte0);
+	SPI.transfer(byte1);
+	
+	setIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
 }
+/********************************End Of File********************************/

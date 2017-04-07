@@ -82,8 +82,8 @@ gpio_read_t gpio_read[MAX_GPIO_INPUT] = {
 #define GPIO_INPUT_ADS7805_BUSY         21//TBD
 
 const gpio_t raspiGpio[RASPI_GPIO_SIZE] = {
-{GPIO_OUTPUT_DAC714_AA0,        OUTPUT,         LOW},
-{GPIO_OUTPUT_DAC714_AA1,        OUTPUT,         LOW},
+{GPIO_OUTPUT_DAC714_AA0,        OUTPUT,         HIGH},
+{GPIO_OUTPUT_DAC714_AA1,        OUTPUT,         HIGH},
 {GPIO_OUTPUT_595_DS,            OUTPUT,         LOW},
 {GPIO_OUTPUT_595_STCP,          OUTPUT,         LOW},
 {GPIO_OUTPUT_595_SHCP,          OUTPUT,         LOW},
@@ -156,8 +156,8 @@ void raspi_gpio_init(void)
     gpioSetMode(GPIO_OUTPUT_SPI_SIN,       PI_OUTPUT);
     gpioSetMode(GPIO_OUTPUT_SPI_SCLK,       PI_OUTPUT);
 
-    gpioWrite(GPIO_OUTPUT_DAC714_AA0,    0);
-    gpioWrite(GPIO_OUTPUT_DAC714_AA1,       0);
+    gpioWrite(GPIO_OUTPUT_DAC714_AA0,    1);//default value
+    gpioWrite(GPIO_OUTPUT_DAC714_AA1,       1);
     gpioWrite(GPIO_OUTPUT_595_DS,       0);
     gpioWrite(GPIO_OUTPUT_595_STCP,     0);
     gpioWrite(GPIO_OUTPUT_595_SHCP,    0);
@@ -168,8 +168,8 @@ void raspi_gpio_init(void)
 /****************************************************************/
 void raspi_gpio_deinit()
 {
-    gpioWrite(GPIO_OUTPUT_DAC714_AA0,    0);
-    gpioWrite(GPIO_OUTPUT_DAC714_AA1,       0);
+    gpioWrite(GPIO_OUTPUT_DAC714_AA0,    1);
+    gpioWrite(GPIO_OUTPUT_DAC714_AA1,       1);
     gpioWrite(GPIO_OUTPUT_595_DS,       0);
     gpioWrite(GPIO_OUTPUT_595_STCP,     0);
     gpioWrite(GPIO_OUTPUT_595_SHCP,    0);
