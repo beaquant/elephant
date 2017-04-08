@@ -21,24 +21,13 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-#include <unistd.h>
-#include "piconfig.h"
-#include "types.h"
 
-#include "74hc595.h"
-#include "gpio.h"
+
 
 /*****************************************************************************
 * Define section
 * add all #define here
 *****************************************************************************/
-#define   HC_DATA_H()        gpioWrite(GPIO_OUTPUT_595_DS,       HIGH)   // data line output high
-#define   HC_DATA_L()        gpioWrite(GPIO_OUTPUT_595_DS,       LOW)   //date line output low
-#define   HC_LANCH_H()       gpioWrite(GPIO_OUTPUT_595_STCP, HIGH)   // rck output high
-#define   HC_LANCH_L()       gpioWrite(GPIO_OUTPUT_595_STCP, LOW)  // rck output low
-#define   HC_CLOCK_H()       gpioWrite(GPIO_OUTPUT_595_SHCP, HIGH)   // sck output high
-#define   HC_CLOCK_L()       gpioWrite(GPIO_OUTPUT_595_SHCP, LOW)  // sck output low
-
 
 /****************************************************************************
 * ADT section
@@ -59,8 +48,6 @@
 * e.g.
 *	int8_t foo;
 ****************************************************************************/
-uint16_t u16ExIOBuf;
-
 
 /*****************************************************************************
 * Global variables section - Local
@@ -69,7 +56,6 @@ uint16_t u16ExIOBuf;
 * e.g.
 *	static uint8_t ufoo;
 *****************************************************************************/
-
 
 /* function body */
 
@@ -81,37 +67,93 @@ uint16_t u16ExIOBuf;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-void set595BufByBit(uint8_t index)
+int piEnv_gpioSetMode(unsigned gpio, unsigned mode)
 {
-    u16ExIOBuf |= 0x0001 << index;
+    return 0;
 }
-void clr595BufByBit(uint8_t index)
+
+int piEnv_gpioGlitchFilter(unsigned user_gpio, unsigned steady)
 {
-    u16ExIOBuf &= ~(0x0001 << index);
+    return 0;
 }
-void update595Output(void)
+
+int piEnv_gpioWrite(unsigned gpio, unsigned level)
 {
-    uint8_t i;
-    uint16_t temp;
-    temp = u16ExIOBuf;
-    HC_LANCH_L(); //latch open
-    HC_CLOCK_L();
-    for(i = 0; i < IO_EX_595_DATA_LEN; i++){
-        if(temp & 0x0001){
-            HC_DATA_H();
-        }
-        else{
-            HC_DATA_L();
-        }
-        HC_CLOCK_H();
-        usleep(10);
-        HC_CLOCK_L();
-        temp >>= 1;
-    }
-    HC_LANCH_H();
-    usleep(10);
-    HC_LANCH_L();
+    return 0;
 }
+
+int piEnv_gpioInitialise(void)
+{
+	return 0;
+}
+
+void piEnv_gpioTerminate(void)
+{
+	
+}
+
+unsigned piEnv_gpioVersion(void)
+{
+	return 0;
+}
+unsigned piEnv_gpioHardwareRevision(void)
+{
+	return 0;
+}
+
+int piEnv_gpioRead(unsigned gpio)
+{
+	return 0;
+}
+
+int piEnv_serOpen(char *sertty, unsigned baud, unsigned serFlags)
+{
+	return 0;
+}
+
+int piEnv_serClose(unsigned handle)
+{
+	return 0;
+}
+int piEnv_serWriteByte(unsigned handle, unsigned bVal)
+{
+	return 0;
+}
+int piEnv_serReadByte(unsigned handle)
+{
+	return 0;
+}
+int piEnv_serWrite(unsigned handle, char *buf, unsigned count)
+{
+	return 0;
+}
+int piEnv_serRead(unsigned handle, char *buf, unsigned count)
+{
+	return 0;
+}
+int piEnv_serDataAvailable(unsigned handle)
+{
+	return 0;
+}
+
+int piEnv_spiOpen(unsigned spiChan, unsigned baud, unsigned spiFlags)
+{
+	return 0;
+}
+
+int piEnv_spiClose(unsigned handle)
+{
+	return 0;
+}
+int piEnv_spiRead(unsigned handle, char *buf, unsigned count)
+{
+	return 0;
+}
+int piEnv_spiWrite(unsigned handle, char *buf, unsigned count)
+{
+	return 0;
+}
+
 
 
 /********************************End Of File********************************/

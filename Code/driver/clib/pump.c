@@ -21,9 +21,12 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-#include "pigpio.h"
-#include "ringbuf.h"
-
+#include "types.h"
+#include "piconfig.h"
+//#include "spi_man.h"
+//#include "ringbuf.h"
+#include <pthread.h>
+#include <stdio.h>
 /*****************************************************************************
 * Define section
 * add all #define here
@@ -105,33 +108,12 @@ uint8_t parserState;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-void pumpInit(void)
-{
-    int err;
-
-	uartFd = serOpen(PI_UART, UART_BAUD, 0);
-	if(uartFd < 0){
-		return ;	
-	}
-	
-	// uartTxBuf = ringbuf_new(UART_TX_SIZE -1);
-	// uartRxBuf = ringbuf_new(UART_RX_SIZE -1);
-	// ringbuf_reset(uartTxBuf);
-	// ringbuf_reset(uartRxBuf);
-	
-	err = pthread_create(&uartRxTid, NULL, OEMRspHandler, NULL);
-    if ( 0 != err ){
-        printf("can't create thread for oem response handler:%s\n", strerror(err));
-    }
-    printf("%ld running\n", uartRxTid);
-
-}
 
 void OEMWrite(uint8_t address, uint8_t * data, uint8_t len)
 {
 	uint8_t i, checksum = 0;
 	uint8_t buf[200];
-	uint8_t ret = -1;
+	int8_t ret = -1;
 	
 	buf[0] = STX;
 	checksum = STX;
@@ -144,7 +126,7 @@ void OEMWrite(uint8_t address, uint8_t * data, uint8_t len)
 	buf[2 + i] = ETX;
 	checksum ^= ETX;
 	buf[2 + i + 1] = checksum;
-	ret = serWrite(uartFd, buf, len + 4);
+	ret = serWrite(uartFd, (char *)buf, len + 4);
 }
 
 void OEMRspHandler(void *arg)
@@ -200,6 +182,30 @@ void OEMRspHandler(void *arg)
 			}
 		}
 	}
+}
+
+
+
+void pumpInit(void)
+{
+    int err;
+
+	uartFd = serOpen(PI_UART, UART_BAUD, 0);
+	if(uartFd < 0){
+		return ;
+	}
+
+	// uartTxBuf = ringbuf_new(UART_TX_SIZE -1);
+	// uartRxBuf = ringbuf_new(UART_RX_SIZE -1);
+	// ringbuf_reset(uartTxBuf);
+	// ringbuf_reset(uartRxBuf);
+
+	err = pthread_create(&uartRxTid, NULL, (void *)OEMRspHandler, NULL);
+    if ( 0 != err ){
+        printf("can't create thread for oem response handler:%s\n", strerror(err));
+    }
+    printf("%ld running\n", uartRxTid);
+
 }
 
 /********************************End Of File********************************/

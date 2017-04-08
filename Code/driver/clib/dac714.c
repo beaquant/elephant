@@ -21,8 +21,10 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
+#include "types.h"
 #include "gpio.h"
 #include "dac714.h"
+#include "piconfig.h"
 
 
 /*****************************************************************************
@@ -69,8 +71,8 @@ void dac714_set(uint16_t data)
     gpioWrite(GPIO_OUTPUT_DAC714_AA0,    LOW);
 	byte0 = (data >> 8);
 	byte1 = data & 0xFF;
-	SPI.transfer(byte0);
-	SPI.transfer(byte1);
+//	SPI.transfer(byte0);
+//	SPI.transfer(byte1);
 	gpioWrite(GPIO_OUTPUT_DAC714_AA0, HIGH);
 
 	gpioWrite(GPIO_OUTPUT_DAC714_AA1, LOW);

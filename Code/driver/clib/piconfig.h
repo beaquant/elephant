@@ -18,8 +18,8 @@
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
-#ifndef _GPIO_H_
-#define _GPIO_H_
+#ifndef _PICONFIG_H_
+#define _PICONFIG_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,73 +34,60 @@ extern "C" {
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-#define GPIO_OUTPUT_DAC714_AA0          2
-#define GPIO_OUTPUT_DAC714_AA1          3
-#define GPIO_OUTPUT_595_DS              5
-#define GPIO_OUTPUT_595_STCP            6
-#define GPIO_OUTPUT_595_SHCP            13
-#define GPIO_OUTPUT_SPI_SIN             10
-#define GPIO_OUTPUT_SPI_SCLK            11
+#define PI_ENVALUATE_GPIO_LIB
+#undef PI_GPIO_LIB
 
-#define GPIO_INPUT_AD7715_DOUT          17
-#define GPIO_INPUT_ADS7805_A0           18
-#define GPIO_INPUT_ADS7805_A1           23
-#define GPIO_INPUT_ADS7805_A2           24
-#define GPIO_INPUT_ADS7805_A3           25
-#define GPIO_INPUT_ADS7805_A4           12
-#define GPIO_INPUT_ADS7805_A5           16
-#define GPIO_INPUT_ADS7805_A6           20
-#define GPIO_INPUT_ADS7805_A7           21
-#define GPIO_INPUT_ADS7805_BUSY         21//TBD
+#ifdef PI_GPIO_LIB
+	#include <pigpio.h>
+#endif
+#ifdef PI_ENVALUATE_GPIO_LIB
+	#include "pienv.h"
+	
+	
+	
+#define gpioSetMode				piEnv_gpioSetMode
+#define gpioGlitchFilter		piEnv_gpioGlitchFilter
+#define gpioWrite				piEnv_gpioWrite
+#define gpioInitialise			piEnv_gpioInitialise
+#define gpioTerminate			piEnv_gpioTerminate
+#define gpioVersion				piEnv_gpioVersion
+#define gpioHardwareRevision	piEnv_gpioHardwareRevision
+#define gpioRead				piEnv_gpioRead
+#define serOpen					piEnv_serOpen
+#define serClose				piEnv_serClose
+#define serWriteByte			piEnv_serWriteByte
+#define serReadByte				piEnv_serReadByte
+#define serWrite				piEnv_serWrite
+#define serRead					piEnv_serRead
+#define serDataAvailable		piEnv_serDataAvailable
 
-#define RASPI_GPIO_SIZE               (GPIO_INDEX_TOTAL)
+#define spiOpen		piEnv_spiOpen
+#define spiClose		piEnv_spiClose
+#define spiRead		piEnv_spiRead
+#define spiWrite		piEnv_spiWrite
 
-#define HIGH                            1
-#define LOW                             0
-#define OUTPUT                          1
-#define INPUT                           0
+
+
+#endif
 
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here
 ***************************************************************************/
-typedef struct{
-    uint8_t gpio;
-    uint8_t dir;
-    uint8_t defaultValue;
-}gpio_t;
 
-enum{
- GPIO_INDEX_DAC714_AA0 = 0,
- GPIO_INDEX_DAC714_AA1,
- GPIO_INDEX_595_DS    ,
- GPIO_INDEX_595_STCP   ,
- GPIO_INDEX_595_SHCP   ,
- GPIO_INDEX_SPI_SIN  ,
- GPIO_INDEX_SPI_SCLK   ,
 
- GPIO_INDEX_AD7715_DOUT  ,
- GPIO_INDEX_ADS7805_A0   ,
- GPIO_INDEX_ADS7805_A1   ,
- GPIO_INDEX_ADS7805_A2   ,
- GPIO_INDEX_ADS7805_A3  ,
- GPIO_INDEX_ADS7805_A4  ,
- GPIO_INDEX_ADS7805_A5   ,
- GPIO_INDEX_ADS7805_A6    ,
- GPIO_INDEX_ADS7805_A7     ,
- GPIO_INDEX_ADS7805_BUSY   ,
- GPIO_INDEX_TOTAL
-
-};
 /****************************************************************************
 *  extern variable declaration section
 ***************************************************************************/
-extern const gpio_t raspiGpio[RASPI_GPIO_SIZE];
+
 
 /****************************************************************************
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+
+
+
 #ifdef __cplusplus
 }
 #endif

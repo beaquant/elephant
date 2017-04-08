@@ -21,6 +21,10 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
+#include "types.h"
+#include "piconfig.h"
+#include "74hc595.h"
+#include "gpio.h"
 
 
 
@@ -39,7 +43,7 @@ enum{
     ADS7805STATE_CHECK_BUSY,
     ADS7805STATE_OUTPUTDATA,
     ADS7805STATE_GETDATA
-}
+};
 
 /******************************************************************************
 * Function prototype section
@@ -144,7 +148,7 @@ void ads7805StateUpdate(void)
         ads7805StartOutputData();
         ads7805State = ADS7805STATE_GETDATA;
     break;
-    case ADS7805STATE_GETDATA
+    case ADS7805STATE_GETDATA:
         ads7805GetData();
         ads7805State = ADS7805STATE_IDLE;
     break;

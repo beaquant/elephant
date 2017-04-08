@@ -21,6 +21,7 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
+#include "types.h"
 #include "74hc595.h"
 
 
@@ -79,12 +80,12 @@ void tlc5615_set(uint16_t data_a, uint16_t data_b)
 	clrIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
 	byte0 = (data_b >> 8);
 	byte1 = data_b & 0xFF;
-	SPI.transfer(byte0);
-	SPI.transfer(byte1);
+//	SPI.transfer(byte0);
+//	SPI.transfer(byte1);
 	byte0 = (data_a >> 8);
 	byte1 = data_a & 0xFF;
-	SPI.transfer(byte0);
-	SPI.transfer(byte1);
+//	SPI.transfer(byte0);
+//	SPI.transfer(byte1);
 	
 	setIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
 }
