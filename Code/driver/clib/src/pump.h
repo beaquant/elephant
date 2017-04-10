@@ -51,7 +51,9 @@ extern "C" {
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+void pumpInit(void);
 
+void OEMWrite(uint8_t address, uint8_t * data, uint8_t len);
 
 
 

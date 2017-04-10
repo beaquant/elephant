@@ -18,8 +18,8 @@
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
-#ifndef _SPI_MAN_H_
-#define _SPI_MAN_H_
+#ifndef _LOGGER_H_
+#define _LOGGER_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,6 +29,7 @@ extern "C" {
 * #include section
 *	add #include here if any
 ***************************************************************************/
+#include <stdio.h>
 
 /****************************************************************************
 * #define section
@@ -40,27 +41,7 @@ extern "C" {
 * ADT section
 *	add Abstract Data Type definition here
 ***************************************************************************/
-enum{
-	SPI_INDEX_AD7715,
-	SPI_INDEX_MAX5541,
-	SPI_INDEX_DAC714,
-	SPI_INDEX_TLC5615,
-	SPI_MAX_NUMBER
-};
 
-#define SPI_DATA_MAX		30
-typedef struct{
-	uint8_t index;
-	uint8_t data[SPI_DATA_MAX];
-	uint8_t len;	
-}SPI_CTRL_T;
-
-// typedef struct{
-	// SPI_CTRL_T buf;
-	
-	
-// }
-#define SPI_BUF_MAX			16
 
 /****************************************************************************
 *  extern variable declaration section
@@ -72,8 +53,11 @@ typedef struct{
 *	add function prototype here if any
 ***************************************************************************/
 
+void log_print(char* filename, int line, char *fmt,...);
+void debug_print(char* filename, int line);
 
-
+//#define LOG_PRINT(...) log_print(__FILE__, __LINE__, __VA_ARGS__ )
+#define LOG_PRINT(...)	debug_print(__FILE__,  __LINE__); printf(__VA_ARGS__ );printf("\n");
 
 #ifdef __cplusplus
 }

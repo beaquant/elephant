@@ -26,7 +26,9 @@
 //#include "spi_man.h"
 //#include "ringbuf.h"
 #include <pthread.h>
-#include <stdio.h>
+#include"logger.h"
+#include <errno.h>
+#include<string.h>
 /*****************************************************************************
 * Define section
 * add all #define here
@@ -133,7 +135,7 @@ void OEMRspHandler(void *arg)
 {
 	// int8_t numbers = -1;
 	uint8_t dat;
-    printf("OEMRspHandler thread begin  %ld  \n", uartRxTid);
+	LOG_PRINT("OEMRspHandler thread begin  %ld  \n", uartRxTid);
     pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);           //允许退出线程
     pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,   NULL);   //设置立即取消
 	while(1){
@@ -192,6 +194,7 @@ void pumpInit(void)
 
 	uartFd = serOpen(PI_UART, UART_BAUD, 0);
 	if(uartFd < 0){
+		LOG_PRINT("can't open uart:%s. \n", PI_UART);
 		return ;
 	}
 
@@ -202,9 +205,9 @@ void pumpInit(void)
 
 	err = pthread_create(&uartRxTid, NULL, (void *)OEMRspHandler, NULL);
     if ( 0 != err ){
-        printf("can't create thread for oem response handler:%s\n", strerror(err));
+    	LOG_PRINT("can't create thread for oem response handler:%s\n", strerror(err));
     }
-    printf("%ld running\n", uartRxTid);
+    LOG_PRINT("%ld running\n", uartRxTid);
 
 }
 

@@ -108,7 +108,7 @@ int piEnv_gpioRead(unsigned gpio)
 
 int piEnv_serOpen(char *sertty, unsigned baud, unsigned serFlags)
 {
-	return 0;
+	return -1;
 }
 
 int piEnv_serClose(unsigned handle)

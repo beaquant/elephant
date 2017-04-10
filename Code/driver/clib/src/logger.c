@@ -12,7 +12,7 @@
 *	$Date:  	$
 *-----------------------------------------------------------------------------
 *   The information contained herein is confidential property of Zhihao
-*   The use, copying, transfer or disclosure of such information is prohibited 
+*   The use, copying, transfer or disclosure of such information is prohibited
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
@@ -21,9 +21,11 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-#include "ringbuf.h"
-#include "spi_man.h"
-
+#include<stdarg.h>
+#include<time.h>
+#include<string.h>
+#include<stdlib.h>
+#include"logger.h"
 
 
 /*****************************************************************************
@@ -50,8 +52,7 @@
 * e.g.
 *	int8_t foo;
 ****************************************************************************/
-SPI_CTRL_T spi_buf[SPI_BUF_MAX];
-struct ringbuf spi_ringbuf;
+
 /*****************************************************************************
 * Global variables section - Local
 * define global variables(will be refered only in this file) here,
@@ -70,40 +71,80 @@ struct ringbuf spi_ringbuf;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-void spi_man_init(void)
+
+FILE * fp;
+static int SESSION_TRACKER; //Keepstrackofsession
+
+char * print_time(void)
 {
-	ringbuf(&spi_ringbuf, spi_buf, SPI_BUF_MAX);
-	// spiOpen(
-	
+	int size = 0;
+	time_t t;
+	char* buf;
+
+	t = time(NULL);/*get current calendar time*/
+
+	char*timestr = asctime(localtime(&t));
+	timestr[strlen(timestr) - 1] = 0; //Gettingridof\n
+
+	size = strlen(timestr) + 1 + 2; //Additional+2forsquarebraces
+	buf = (char*) malloc(size);
+
+	memset(buf, 0x0, size);
+	snprintf(buf, size, "[%s]", timestr);
+
+	return buf;
+}
+void log_print(char* filename, int line, char* fmt, ...)
+{
+	va_list list;
+	char *p, *r;
+	int e;
+
+	if (SESSION_TRACKER > 0)
+		fp = fopen("log.txt", "a+");
+	else
+		fp = fopen("log.txt", "w");
+
+	fprintf(fp, "%s", print_time());
+	fprintf(fp, "[%s][line:%d]", filename, line);
+	va_start(list, fmt);
+
+	for (p = fmt; *p; ++p) {
+		if (*p != '%') { //If simple string
+			fputc(*p, fp);
+		} else {
+			switch (*++p) {
+				/*string*/
+				case 's': {
+					r = va_arg(list, char*);
+					fprintf(fp, "%s", r);
+					continue;
+				}
+				/*integer*/
+				case 'd': {
+					e = va_arg(list, int);
+					fprintf(fp, "%d", e);
+					continue;
+				}
+				default:
+					fputc(*p, fp);
+			}
+		}
+	}
+	va_end(list);
+	fputc('\n', fp);
+	SESSION_TRACKER++;
+	fclose(fp);
 }
 
-uint8_t spi_man_write(uint8_t index, uint8_t *data, uint8_t len)
+void debug_print(char* filename, int line)
 {
-	SPI_CTRL_T buf;
-	uint8_t i;
-	// if(ringbuf_avaliable(&spi_ringbuf) <= 0{
-		// return 1;
-	// }
-	if(len >= SPI_DATA_MAX){
-		return 0;
-	}
-	
-	buf.index = index;
-	buf.len = len;
-	for(i = 0; i < len; i++){
-		buf.data[i] = data[i];
-	}
-	
-	return ringbuf_put(&spi_ringbuf, buf);
-	
-}
+	char s[250]={0,};
 
-uint8_t spi_man_trasmit(void)
-{
-	SPI_CTRL_T buf;
-	if(ringbuf_get(&spi_ringbuf, buf) < 0){
-		return 0;
-	}
-	buf.index;
+	sprintf(s, "%s", print_time());printf("%s, ",s);
+	sprintf(s, "[%s][line:%d]", filename, line);
+	printf("%s, ",s);
+//	printf(fmt);
+
 }
-/********************************End Of File********************************/
+/********************************EndOfFile********************************/
