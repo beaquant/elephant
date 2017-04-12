@@ -1,0 +1,15 @@
+{
+	"video":	{
+		"width":	1280,
+		"height":	720,
+		"quality":	"720P",
+		"fps":	30,
+		"format":	"H264",
+		"bitrate":	1024
+	},
+	"audio":	{
+		"bitrate":	1024,
+		"format":	"AVC"
+	},
+	"motion":	false
+}

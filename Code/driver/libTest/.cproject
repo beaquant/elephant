@@ -29,6 +29,8 @@
 								<option id="gnu.c.compiler.exe.debug.option.debugging.level.755542396" name="Debug Level" superClass="gnu.c.compiler.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.include.paths.889067697" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/src/cJSON-1.4.6}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/src/Jconfig}&quot;"/>
 								</option>
 								<option id="gnu.c.compiler.option.include.files.1702837235" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.misc.pic.336042106" name="Position Independent Code (-fPIC)" superClass="gnu.c.compiler.option.misc.pic" useByScannerDiscovery="false" value="true" valueType="boolean"/>
@@ -271,9 +273,15 @@
 		<configuration configurationName="Multiple configurations">
 			<resource resourceType="PROJECT" workspacePath="/libTest"/>
 		</configuration>
-		<configuration configurationName="RASPI-RELEASE"/>
-		<configuration configurationName="RASPI-DEBUG"/>
-		<configuration configurationName="Debug"/>
+		<configuration configurationName="RASPI-RELEASE">
+			<resource resourceType="PROJECT" workspacePath="/libTest"/>
+		</configuration>
+		<configuration configurationName="RASPI-DEBUG">
+			<resource resourceType="PROJECT" workspacePath="/libTest"/>
+		</configuration>
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/libTest"/>
+		</configuration>
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/libTest"/>
 		</configuration>

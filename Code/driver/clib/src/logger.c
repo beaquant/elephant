@@ -73,7 +73,7 @@
 *****************************************************************************/
 
 FILE * fp;
-static int SESSION_TRACKER; //Keepstrackofsession
+static int SESSION_TRACKER; //Keep strack of session
 
 char * print_time(void)
 {

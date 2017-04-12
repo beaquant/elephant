@@ -1,0 +1,10 @@
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:21]Hello World 
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:22]Zing is back !!! Bitter Truth 199
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:21]Hello World 
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:22]Zing is back !!! Bitter Truth 200
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:21]Hello World 
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:22]Zing is back !!! Bitter Truth 201
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:21]Hello World 
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:22]Zing is back !!! Bitter Truth 202
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:21]Hello World 
+[Mon Apr 10 06:21:49 2017][../src/Elephant.c][line:22]Zing is back !!! Bitter Truth 203

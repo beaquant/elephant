@@ -8,13 +8,26 @@
  ============================================================================
  */
 
+#include <Jconfig.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
+#include "types.h"
+#include "pump.h"
 
+int  main()
+{
+	cJSON *root = NULL;
+	char *tmp = NULL;
+	configManager *manager = NULL;
 
-int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-	printf("%d\n", pumperSetNumber(1));
-	return EXIT_SUCCESS;
+	manager = initConfigManager();
+
+	printf("config manager init ok \n");
+
+	saveConfigFiles(manager);
+
+	printf("save config manager ok \n");
+
+	delConfigManager(manager);
+
+	return 0;
 }
