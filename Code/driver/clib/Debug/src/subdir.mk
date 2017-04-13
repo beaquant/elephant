@@ -14,6 +14,7 @@ C_SRCS += \
 ../src/pienv.c \
 ../src/pump.c \
 ../src/spi.c \
+../src/sysconfig.c \
 ../src/template.c \
 ../src/tlc5615.c \
 ../src/version.c 
@@ -29,6 +30,7 @@ OBJS += \
 ./src/pienv.o \
 ./src/pump.o \
 ./src/spi.o \
+./src/sysconfig.o \
 ./src/template.o \
 ./src/tlc5615.o \
 ./src/version.o 
@@ -44,6 +46,7 @@ C_DEPS += \
 ./src/pienv.d \
 ./src/pump.d \
 ./src/spi.d \
+./src/sysconfig.d \
 ./src/template.d \
 ./src/tlc5615.d \
 ./src/version.d 

@@ -21,11 +21,8 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-#include<stdarg.h>
-#include<time.h>
-#include<string.h>
-#include<stdlib.h>
-#include"logger.h"
+#include "types.h"
+#include "sysconfig.h"
 
 
 /*****************************************************************************
@@ -52,6 +49,7 @@
 * e.g.
 *	int8_t foo;
 ****************************************************************************/
+_sysConfig	sysConfig;
 
 /*****************************************************************************
 * Global variables section - Local
@@ -72,79 +70,4 @@
 *		what does this function returned?
 *****************************************************************************/
 
-FILE * fp;
-static int SESSION_TRACKER; //Keep strack of session
-
-char * printTime(void)
-{
-	int size = 0;
-	time_t t;
-	char* buf;
-
-	t = time(NULL);/*get current calendar time*/
-
-	char*timestr = asctime(localtime(&t));
-	timestr[strlen(timestr) - 1] = 0; //Gettingridof\n
-
-	size = strlen(timestr) + 1 + 2; //Additional+2forsquarebraces
-	buf = (char*) malloc(size);
-
-	memset(buf, 0x0, size);
-	snprintf(buf, size, "[%s]", timestr);
-
-	return buf;
-}
-void logPrint(char* filename, int line, char* fmt, ...)
-{
-	va_list list;
-	char *p, *r;
-	int e;
-
-	if (SESSION_TRACKER > 0)
-		fp = fopen("log.txt", "a+");
-	else
-		fp = fopen("log.txt", "w");
-
-	fprintf(fp, "%s", print_time());
-	fprintf(fp, "[%s][line:%d]", filename, line);
-	va_start(list, fmt);
-
-	for (p = fmt; *p; ++p) {
-		if (*p != '%') { //If simple string
-			fputc(*p, fp);
-		} else {
-			switch (*++p) {
-				/*string*/
-				case 's': {
-					r = va_arg(list, char*);
-					fprintf(fp, "%s", r);
-					continue;
-				}
-				/*integer*/
-				case 'd': {
-					e = va_arg(list, int);
-					fprintf(fp, "%d", e);
-					continue;
-				}
-				default:
-					fputc(*p, fp);
-			}
-		}
-	}
-	va_end(list);
-	fputc('\n', fp);
-	SESSION_TRACKER++;
-	fclose(fp);
-}
-
-void debugPrint(char* filename, int line)
-{
-	char s[250]={0,};
-
-	sprintf(s, "%s", print_time());printf("%s, ",s);
-	sprintf(s, "[%s][line:%d]", filename, line);
-	printf("%s, ",s);
-//	printf(fmt);
-
-}
-/********************************EndOfFile********************************/
+/********************************End Of File********************************/

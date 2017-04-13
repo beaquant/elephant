@@ -69,12 +69,12 @@
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-void tlc5615_init(void)
+void tlc5615Init(void)
 {
 	
 }
 
-void tlc5615_set(uint16_t data_a, uint16_t data_b)
+void tlc5615Set(uint16_t data_a, uint16_t data_b)
 {
 	uint8_t byte0, byte1;
 	clrIoRefresh(IO_EX_595_BIT4_TLC5615_CS);

@@ -14,12 +14,12 @@
 *
 *-----------------------------------------------------------------------------
 *   The information contained herein is confidential property of Zhihao
-*   The use, copying, transfer or disclosure of such information is prohibited 
+*   The use, copying, transfer or disclosure of such information is prohibited
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
-#ifndef _LOGGER_H_
-#define _LOGGER_H_
+#ifndef _SYS_CONFIG_H_
+#define _SYS_CONFIG_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,35 +29,54 @@ extern "C" {
 * #include section
 *	add #include here if any
 ***************************************************************************/
-#include <stdio.h>
 
 /****************************************************************************
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-
+#define MAX_PUMP_NUMBER				15
 
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here
 ***************************************************************************/
 
+typedef struct __pumpConfig{
+	uint8_t		addr;
+	uint16_t	injectCap;
+}_pumpConfig;
 
+typedef struct __pumpData{
+	_pumpConfig	conf;
+	uint16_t			injectRemainCap;
+	uint32_t			injectPos;
+	uint32_t			valvePos;
+}_pumpData;
+
+typedef struct __pump{
+	uint8_t					number;
+	_pumpData			pumpData[MAX_PUMP_NUMBER];
+}_pump;
+
+
+
+
+
+typedef struct __sysConfig{
+	_pump					pump;
+}_sysConfig;
 /****************************************************************************
 *  extern variable declaration section
 ***************************************************************************/
-
+extern _sysConfig	sysConfig;
 
 /****************************************************************************
 *  section
 *	add function prototype here if any
 ***************************************************************************/
 
-void logPrint(char* filename, int line, char *fmt,...);
-void debugPrint(char* filename, int line);
 
-//#define LOG_PRINT(...) log_print(__FILE__, __LINE__, __VA_ARGS__ )
-#define LOG_PRINT(...)	debugPrint(__FILE__,  __LINE__); printf(__VA_ARGS__ );printf("\n");
+
 
 #ifdef __cplusplus
 }

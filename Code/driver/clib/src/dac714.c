@@ -61,11 +61,11 @@
 *****************************************************************************/
 
 /* function body */
-void dac714_init(void)
+void dac714Init(void)
 {
 	
 }
-void dac714_set(uint16_t data)
+void dac714Set(uint16_t data)
 {
 	uint8_t byte0, byte1;
     gpioWrite(GPIO_OUTPUT_DAC714_AA0,    LOW);

@@ -97,17 +97,17 @@ const gpio_t raspiGpio[RASPI_GPIO_SIZE] = {
 /* function body */
 
 /****************************************************************/
-int raspi_gpio_hw_ver(void)
+int raspiGpioHwVer(void)
 {
     return gpioHardwareRevision();
 }
 /****************************************************************/
-int raspi_gpio_ver(void)
+int raspiGpioVer(void)
 {
     return gpioVersion();
 }
 /****************************************************************/
-void raspi_gpio_init(void)
+void raspiGpioInit(void)
 {
     if (gpioInitialise()<0) return ;
     /* set gpio input mode */
@@ -151,7 +151,7 @@ void raspi_gpio_init(void)
 
 }
 /****************************************************************/
-void raspi_gpio_deinit()
+void raspiGpioDeinit()
 {
     gpioWrite(GPIO_OUTPUT_DAC714_AA0,    1);
     gpioWrite(GPIO_OUTPUT_DAC714_AA1,       1);
