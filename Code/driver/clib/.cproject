@@ -40,7 +40,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1619333054" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base">
 								<option id="gnu.c.link.option.libs.849995765" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="pthread"/>
-									<listOptionValue builtIn="false" value="cjson"/>
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<option defaultValue="true" id="gnu.c.link.option.shared.1325066300" name="Shared (-shared)" superClass="gnu.c.link.option.shared" useByScannerDiscovery="false" valueType="boolean"/>
@@ -101,7 +100,6 @@
 								<option defaultValue="true" id="gnu.c.link.so.release.option.shared.1957722317" name="Shared (-shared)" superClass="gnu.c.link.so.release.option.shared" valueType="boolean"/>
 								<option id="gnu.c.link.option.libs.793588295" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="pthread"/>
-									<listOptionValue builtIn="false" value="cjson"/>
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1649080419" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
@@ -161,7 +159,6 @@
 								<option defaultValue="true" id="gnu.c.link.so.release.option.shared.1053041698" name="Shared (-shared)" superClass="gnu.c.link.so.release.option.shared" valueType="boolean"/>
 								<option id="gnu.c.link.option.libs.2074575791" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
 									<listOptionValue builtIn="false" value="pthread"/>
-									<listOptionValue builtIn="false" value="cjson"/>
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1496527425" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
@@ -221,7 +218,6 @@
 							<tool command="arm-linux-gnueabihf-gcc-4.9" id="cdt.managedbuild.tool.gnu.cross.c.linker.773433925" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker">
 								<option id="gnu.c.link.option.libs.724811147" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="pthread"/>
-									<listOptionValue builtIn="false" value="cjson"/>
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<option defaultValue="true" id="gnu.c.link.option.shared.291655236" name="Shared (-shared)" superClass="gnu.c.link.option.shared" useByScannerDiscovery="false" valueType="boolean"/>

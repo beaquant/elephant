@@ -152,6 +152,8 @@
 							<tool command="arm-linux-gnueabihf-gcc-4.9" id="cdt.managedbuild.tool.gnu.cross.c.compiler.2111327840" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler">
 								<option id="gnu.c.compiler.option.include.paths.432554335" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/src}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/src/cJSON-1.4.6}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/src/Jconfig}&quot;"/>
 								</option>
 								<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.option.optimization.level.410254765" name="Optimization Level" superClass="gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.1799539443" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
@@ -168,8 +170,8 @@
 									<listOptionValue builtIn="false" value="clib"/>
 								</option>
 								<option id="gnu.c.link.option.paths.781476110" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/Debug}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/RASPI-DEBUG}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/Debug}&quot;"/>
 								</option>
 								<option id="gnu.c.link.option.other.1683540140" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="-R&quot;${workspace_loc:/clib/Debug}&quot;"/>
