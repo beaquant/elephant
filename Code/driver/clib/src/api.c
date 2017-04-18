@@ -62,7 +62,7 @@
 * e.g.
 *	static uint8_t ufoo;
 *****************************************************************************/
-
+char * version = "1.0.0";
 /* function body */
 
 /*****************************************************************************
@@ -73,7 +73,10 @@
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-
+char * getFirmwareVersion(void)
+{
+	return version;
+}
 /*
  * 设置系统中泵的数量。
  * 参数: number为泵的数量。泵的数量需根据实际情况来设置，即用户在UI界面中输入。
@@ -107,6 +110,7 @@ uint8_t pumperGetNumber(void)
 uint8_t pumperReset(uint8_t idx)
 {
 	INDEX_CHECK(idx);
+	return NO_ERR;
 }
 
 /*
@@ -117,6 +121,7 @@ uint8_t pumperReset(uint8_t idx)
 uint8_t pumperInjectReset (uint8_t idx)
 {
 	INDEX_CHECK(idx);
+	return NO_ERR;
 }
 
 
@@ -128,6 +133,7 @@ uint8_t pumperInjectReset (uint8_t idx)
 uint8_t pumperValveReset (uint8_t idx)
 {
 	INDEX_CHECK(idx);
+	return NO_ERR;
 }
 
 
@@ -168,7 +174,7 @@ uint16_t pumperGetInjectCapacity (uint8_t idx)
 uint8_t pumperInject(uint8_t idx, uint16_t ul)
 {
 	INDEX_CHECK(idx);
-
+	return NO_ERR;
 }
 
 
@@ -193,7 +199,8 @@ uint16_t pumperInjectRemain(uint8_t idx)
  * */
 uint8_t pumperInjectorRepair(uint8_t idx)
 {
-
+	INDEX_CHECK(idx);
+	return NO_ERR;
 }
 
 

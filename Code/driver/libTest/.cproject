@@ -43,7 +43,6 @@
 								</option>
 								<option id="gnu.c.link.option.paths.1445243122" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/Debug}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/RASPI-DEBUG}&quot;"/>
 								</option>
 								<option id="gnu.c.link.option.other.666458109" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="-R&quot;${workspace_loc:/clib/Debug}&quot;"/>
@@ -171,7 +170,6 @@
 								</option>
 								<option id="gnu.c.link.option.paths.781476110" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/RASPI-DEBUG}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/clib/Debug}&quot;"/>
 								</option>
 								<option id="gnu.c.link.option.other.1683540140" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" useByScannerDiscovery="false" valueType="stringList">
 									<listOptionValue builtIn="false" value="-R&quot;${workspace_loc:/clib/Debug}&quot;"/>

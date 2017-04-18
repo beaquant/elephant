@@ -53,6 +53,7 @@ extern "C" {
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+char * getFirmwareVersion(void);
 
 /*
  * 设置系统中泵的数量。

@@ -105,7 +105,7 @@ void logPrint(char* filename, int line, char* fmt, ...)
 	else
 		fp = fopen("log.txt", "w");
 
-	fprintf(fp, "%s", print_time());
+	fprintf(fp, "%s", printTime());
 	fprintf(fp, "[%s][line:%d]", filename, line);
 	va_start(list, fmt);
 
@@ -141,7 +141,7 @@ void debugPrint(char* filename, int line)
 {
 	char s[250]={0,};
 
-	sprintf(s, "%s", print_time());printf("%s, ",s);
+	sprintf(s, "%s", printTime());printf("%s, ",s);
 	sprintf(s, "[%s][line:%d]", filename, line);
 	printf("%s, ",s);
 //	printf(fmt);
