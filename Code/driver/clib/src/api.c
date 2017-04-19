@@ -23,6 +23,8 @@
 *****************************************************************************/
 #include "types.h"
 #include "sysconfig.h"
+#include "pump.h"
+
 #include "api.h"
 
 
@@ -110,6 +112,8 @@ uint8_t pumperGetNumber(void)
 uint8_t pumperReset(uint8_t idx)
 {
 	INDEX_CHECK(idx);
+	pumperInjectReset(idx);
+	pumperValveReset(idx);
 	return NO_ERR;
 }
 
@@ -120,7 +124,9 @@ uint8_t pumperReset(uint8_t idx)
  */
 uint8_t pumperInjectReset (uint8_t idx)
 {
+	char *s = INJECT_RESET;
 	INDEX_CHECK(idx);
+	OEMWrite(sysConfig.pump.pumpData[idx].conf.addr, s, strlen(s));
 	return NO_ERR;
 }
 
@@ -132,7 +138,9 @@ uint8_t pumperInjectReset (uint8_t idx)
 */
 uint8_t pumperValveReset (uint8_t idx)
 {
+	char *s = VALVE_RESET;
 	INDEX_CHECK(idx);
+	OEMWrite(sysConfig.pump.pumpData[idx].conf.addr, s, strlen(s));
 	return NO_ERR;
 }
 
@@ -213,6 +221,7 @@ uint8_t pumperInjectorRepair(uint8_t idx)
 */
 uint8_t liftReset (void)
 {
+	return NO_ERR;
 
 }
 
@@ -225,6 +234,7 @@ uint8_t liftReset (void)
 */
 uint8_t liftMoveUp(uint16_t mm)
 {
+	return NO_ERR;
 
 }
 
@@ -236,6 +246,7 @@ uint8_t liftMoveUp(uint16_t mm)
 */
 uint8_t liftMoveDown(uint16_t mm)
 {
+	return NO_ERR;
 
 }
 
@@ -246,6 +257,7 @@ uint8_t liftMoveDown(uint16_t mm)
 */
 uint16_t liftGetPosition(void)
 {
+	return NO_ERR;
 
 }
 
@@ -259,6 +271,7 @@ uint16_t liftGetPosition(void)
 */
 uint8_t turnTableStop(void)
 {
+	return NO_ERR;
 
 }
 
@@ -271,6 +284,7 @@ uint8_t turnTableStop(void)
 */
 uint8_t turnTableStart(uint16_t rpm)
 {
+	return NO_ERR;
 
 }
 

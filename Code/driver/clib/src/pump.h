@@ -34,7 +34,8 @@ extern "C" {
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-
+#define INJECT_RESET 			 "Z0"
+#define VALVE_RESET 			 "Y0"
 
 /****************************************************************************
 * ADT section

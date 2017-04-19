@@ -23,8 +23,8 @@
 *****************************************************************************/
 #include "types.h"
 #include "sysconfig.h"
-
-
+//#include "cJSON.h"
+#include <json.h>
 /*****************************************************************************
 * Define section
 * add all #define here
@@ -69,5 +69,14 @@ _sysConfig	sysConfig;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
+void sysConfigInit(void)
+{
+	sysConfig.pump.number = 1;
+	sysConfig.pump.pumpData[0].conf.addr=0;
 
+}
+void sysConfigStore(void)
+{
+
+}
 /********************************End Of File********************************/

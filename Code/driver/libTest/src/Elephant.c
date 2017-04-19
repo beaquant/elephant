@@ -8,11 +8,9 @@
  ============================================================================
  */
 
-#include <Jconfig.h>
 #include <stdio.h>
-#include "types.h"
-#include "pump.h"
-#include "api.h"
+#include <json.h>
+
 //int  main()
 //{
 //	cJSON *root = NULL;
@@ -32,7 +30,17 @@
 //	return 0;
 //}
 
-void main(void)
+//void main(void)
+//{
+//	printf("firmware version: %s\n", getFirmwareVersion());
+//}
+
+int main()
 {
-	printf("firmware version: %s\n", getFirmwareVersion());
+	struct json_object * aaa;
+	aaa = json_object_from_file("/home/eric/github/elephant/Code/driver/libTest/config.json");
+	printf("%s\n",json_object_to_json_string(aaa));
+	return 1;
 }
+
+

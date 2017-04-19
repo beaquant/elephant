@@ -8,8 +8,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include src/cJSON-1.4.6/subdir.mk
--include src/Jconfig/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
 -include objects.mk

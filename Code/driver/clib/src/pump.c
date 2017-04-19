@@ -85,11 +85,9 @@ enum{
 int8_t uartFd= -1;
 // ringbuf_t uartRxBuf, uartTxBuf;
 uartRxBuf_t uartRxBuf;
-
 pthread_t       uartRxTid;
-
-
 uint8_t parserState;
+
 
 
 /*****************************************************************************
