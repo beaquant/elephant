@@ -81,6 +81,10 @@ uint16_t u16ExIOBuf;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
+void reset595Buf()
+{
+    u16ExIOBuf = 0;
+}
 void set595BufByBit(uint8_t index)
 {
     u16ExIOBuf |= 0x0001 << index;

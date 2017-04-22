@@ -41,7 +41,7 @@ extern "C" {
 #define IO_EX_595_BIT4_TLC5615_CS				4
 #define IO_EX_595_BIT5_SN74F575_SNCLK			5
 #define IO_EX_595_BIT6_RESERVED_BUSY		    6
-// #define IO_EX_595_BIT7_RESERVED_BUSY			7
+#define IO_EX_595_BIT7_RESERVED			7
 
 #define IO_EX_595_BIT8_SN74F575_PTD0			8
 #define IO_EX_595_BIT9_SN74F575_PTD1			9
@@ -58,6 +58,8 @@ extern "C" {
 // #define IO_EX_595_PIN_STCP					    6
 // #define IO_EX_595_PIN_SHCP					    13
 
+#define reset595Refresh()			\
+                                reset595Buf();update595Output()
 #define setIoRefresh(index)			\
 				set595BufByBit(index);update595Output()
 #define clrIoRefresh(index)			\
@@ -74,6 +76,7 @@ extern "C" {
 void set595BufByBit(uint8_t index);
 void clr595BufByBit(uint8_t index);
 void update595Output(void);
+void reset595Buf();
 
 
 /****************************************************************************

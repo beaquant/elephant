@@ -23,6 +23,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+# include <stdint.h>
 
 
 /****************************************************************************
@@ -43,48 +44,6 @@ extern "C" {
   *	add function prototype here if any
   ***************************************************************************/
 
-
-#ifndef	FALSE
-	#define FALSE	0
-#endif
-
-#ifndef	TRUE
-	#define TRUE	1	
-#endif
-
-#ifndef NULL
-	#define NULL                   ((void *) 0)
-#endif
-
-#ifndef FAILURE
-	#define FAILURE	0       /* read eeprom success*/
-#endif
-
-#ifndef SUCCESS
-	#define	SUCCESS	1       /* read eeprom success*/
-#endif
-
-
-#ifndef ENABLE
-	#define	ENABLE	                                (1)
-#endif
-#ifndef DISABLE
-	#define DISABLE									(0)
-#endif
-/****************************************************************************
-* ADT section
-*	add Abstract Data Type definition here
-***************************************************************************/
-typedef signed char				    int8_t;
-typedef unsigned char 			    uint8_t;
-typedef signed int				    int16_t;
-typedef unsigned int 			    uint16_t;
-typedef signed long	int			    int32_t;
-typedef unsigned long int			uint32_t;
-typedef float               	    FLOAT;
-typedef double              	    DOUBLE;
-
-// typedef code                  	    CONST_T;
 /****************************************************************************
 *  extern variable declaration section
 ***************************************************************************/

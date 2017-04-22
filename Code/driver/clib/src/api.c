@@ -26,6 +26,7 @@
 #include "pump.h"
 
 #include "api.h"
+#include <string.h>
 
 
 /*****************************************************************************
@@ -140,7 +141,7 @@ uint8_t pumperValveReset (uint8_t idx)
 {
 	char *s = VALVE_RESET;
 	INDEX_CHECK(idx);
-	OEMWrite(sysConfig.pump.pumpData[idx].conf.addr, s, strlen(s));
+	OEMWrite(sysConfig.pump.pumpData[idx].conf.addr, s, (uint8_t)strlen(s));
 	return NO_ERR;
 }
 
