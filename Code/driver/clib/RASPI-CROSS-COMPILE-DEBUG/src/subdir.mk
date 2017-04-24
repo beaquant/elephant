@@ -8,6 +8,7 @@ C_SRCS += \
 ../src/ad7715.c \
 ../src/ads7805.c \
 ../src/api.c \
+../src/com_slackerOne_JPP.c \
 ../src/dac714.c \
 ../src/gpio.c \
 ../src/logger.c \
@@ -24,6 +25,7 @@ OBJS += \
 ./src/ad7715.o \
 ./src/ads7805.o \
 ./src/api.o \
+./src/com_slackerOne_JPP.o \
 ./src/dac714.o \
 ./src/gpio.o \
 ./src/logger.o \
@@ -40,6 +42,7 @@ C_DEPS += \
 ./src/ad7715.d \
 ./src/ads7805.d \
 ./src/api.d \
+./src/com_slackerOne_JPP.d \
 ./src/dac714.d \
 ./src/gpio.d \
 ./src/logger.d \
@@ -55,8 +58,8 @@ C_DEPS += \
 # Each subdirectory must supply rules for building sources it contributes
 src/%.o: ../src/%.c
 	@echo 'Building file: $<'
-	@echo 'Invoking: GCC C Compiler'
-	gcc -O3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	@echo 'Invoking: Cross GCC Compiler'
+	arm-linux-gnueabihf-gcc-4.9 -I/usr/local/include/json-c -I/usr/lib/jvm/java-8-oracle/include -I/usr/lib/jvm/java-8-oracle/include/linux -O0 -g3 -Wall -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -81,6 +81,14 @@ uint16_t u16ExIOBuf;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
+void setAll595Buf()
+{
+	u16ExIOBuf = 0xffff;
+}
+uint16_t get595Buf()
+{
+	return u16ExIOBuf;
+}
 void reset595Buf()
 {
     u16ExIOBuf = 0;

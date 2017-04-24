@@ -38,7 +38,7 @@
 int main()
 {
 	struct json_object * aaa;
-	aaa = json_object_from_file("/home/eric/github/elephant/Code/driver/libTest/config.json");
+	aaa = json_object_from_file("/home/eric/github/elephant/Code/driver/libTest/config2.json");
 	printf("%s\n",json_object_to_json_string(aaa));
 	return 1;
 }

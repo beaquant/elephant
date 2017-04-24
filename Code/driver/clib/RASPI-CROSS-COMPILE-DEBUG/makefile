@@ -8,9 +8,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include src/cJSON-1.4.6/subdir.mk
--include src/Jconfig/subdir.mk
 -include src/subdir.mk
+-include RASPI-RELEASE/src/cJSON-1.4.6/subdir.mk
+-include RASPI-RELEASE/src/Jconfig/subdir.mk
+-include RASPI-RELEASE/src/subdir.mk
 -include subdir.mk
 -include objects.mk
 
@@ -30,8 +31,8 @@ all: libclib.so
 # Tool invocations
 libclib.so: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: GCC C Linker'
-	gcc -shared -o "libclib.so" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Invoking: Cross GCC Linker'
+	arm-linux-gnueabihf-gcc-4.9 -shared -o "libclib.so" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
