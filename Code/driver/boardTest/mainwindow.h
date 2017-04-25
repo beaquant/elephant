@@ -65,6 +65,18 @@ private slots:
 
     void on_Get595_clicked();
 
+    void on_STCP_0_clicked();
+
+    void on_STCP_1_clicked();
+
+    void on_SHCP_0_clicked();
+
+    void on_SHCP_1_clicked();
+
+    void on_DS_0_clicked();
+
+    void on_DS_1_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

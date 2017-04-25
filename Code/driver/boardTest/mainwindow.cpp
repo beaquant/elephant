@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "types.h"
 #include "74hc595.h"
+#include "piconfig.h"
+#include "gpio.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -9,11 +11,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    raspiGpioInit();
+    int GpioVer = raspiGpioVer();
+    QString Ver = QString::number(GpioVer,10);
+    ui->gpioVersionText->setText(Ver);
+    int GpioHwVer = raspiGpioHwVer();
+    QString HwVer = QString::number(GpioHwVer,10);
+    ui->HWVersionText->setText(HwVer);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    raspiGpioDeInit();
 }
 
 void MainWindow::on_HC595PIN0_0_clicked()
@@ -276,4 +286,34 @@ void MainWindow::on_Get595_clicked()
 void MainWindow::on_Get595_clicked()
 {
 
+}
+
+void MainWindow::on_STCP_0_clicked()
+{
+    clrOutput(6);
+}
+
+void MainWindow::on_STCP_1_clicked()
+{
+     setOutput(6);
+}
+
+void MainWindow::on_SHCP_0_clicked()
+{
+    clrOutput(13);
+}
+
+void MainWindow::on_SHCP_1_clicked()
+{
+    setOutput(13);
+}
+
+void MainWindow::on_DS_0_clicked()
+{
+    clrOutput(5);
+}
+
+void MainWindow::on_DS_1_clicked()
+{
+    setOutput(5);
 }
