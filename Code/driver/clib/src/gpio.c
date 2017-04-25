@@ -151,7 +151,7 @@ void raspiGpioInit(void)
 
 }
 /****************************************************************/
-void raspiGpioDeinit()
+void raspiGpioDeInit(void)
 {
     gpioWrite(GPIO_OUTPUT_DAC714_AA0,    1);
     gpioWrite(GPIO_OUTPUT_DAC714_AA1,       1);
@@ -162,5 +162,16 @@ void raspiGpioDeinit()
     gpioWrite(GPIO_OUTPUT_SPI_SCLK,       0);
     gpioTerminate();
 }
+
+
+void setOutput(uint16_t index)
+{
+	gpioWrite(index,    1);
+}
+void clrOutput(uint16_t index)
+{
+	gpioWrite(index,    0);
+}
+
 
 /********************************End Of File********************************/

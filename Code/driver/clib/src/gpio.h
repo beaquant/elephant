@@ -60,6 +60,7 @@ extern "C" {
 #define OUTPUT                          1
 #define INPUT                           0
 
+
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here
@@ -101,6 +102,15 @@ extern const gpio_t raspiGpio[RASPI_GPIO_SIZE];
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+void raspiGpioDeInit(void);
+void raspiGpioInit(void);
+int raspiGpioVer(void);
+int raspiGpioHwVer(void);
+void setOutput(uint16_t index);
+void clrOutput(uint16_t index);
+
+
+
 #ifdef __cplusplus
 }
 #endif

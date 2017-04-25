@@ -321,6 +321,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.656793249" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base">
 								<option id="gnu.c.link.option.libs.686013453" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
 									<listOptionValue builtIn="false" value="pthread"/>
+									<listOptionValue builtIn="false" value="pigpio"/>
 									<listOptionValue builtIn="false" value="m"/>
 								</option>
 								<option defaultValue="true" id="gnu.c.link.option.shared.1167254078" name="Shared (-shared)" superClass="gnu.c.link.option.shared" useByScannerDiscovery="false" valueType="boolean"/>
@@ -356,12 +357,14 @@
 		<configuration configurationName="RASPI-DEBUG">
 			<resource resourceType="PROJECT" workspacePath="/clib"/>
 		</configuration>
+		<configuration configurationName="RASPI-CROSS-COMPILE-RELEASE"/>
 		<configuration configurationName="Debug">
 			<resource resourceType="PROJECT" workspacePath="/clib"/>
 		</configuration>
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/clib"/>
 		</configuration>
+		<configuration configurationName="RASPI-CROSS-COMPILE-DEBUG"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="scannerConfiguration">
