@@ -22,3 +22,4 @@ FORMS    += mainwindow.ui
 LIBS     += -L/home/eric/github/elephant/Code/driver/clib/Debug -lclib
 
 INCLUDEPATH += /home/eric/github/elephant/Code/driver/clib/src
+DEPENDPATH += /home/eric/github/elephant/Code/driver/clib/src

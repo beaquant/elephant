@@ -22,6 +22,7 @@
 *	add all #include here
 *****************************************************************************/
 #include "types.h"
+#include <stdio.h>
 #include "gpio.h"
 #include "piconfig.h"
 
@@ -109,7 +110,15 @@ int raspiGpioVer(void)
 /****************************************************************/
 void raspiGpioInit(void)
 {
-    if (gpioInitialise()<0) return ;
+	int ret = gpioInitialise();
+    if (ret<0) {
+    	printf("gpio initialise fail\n");
+    	return ;
+    }
+    printf("gpio initialise success:%d\n",ret);
+    printf("gpioHardwareRevision:%d\n",raspiGpioHwVer());
+    printf("raspiGpioVer:%d\n",raspiGpioVer());
+
     /* set gpio input mode */
     gpioSetMode(GPIO_INPUT_AD7715_DOUT,         INPUT);
     gpioSetMode(GPIO_INPUT_ADS7805_A0,          INPUT);

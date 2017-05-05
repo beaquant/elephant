@@ -34,8 +34,14 @@ extern "C" {
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-#define PI_ENVALUATE_GPIO_LIB
-#undef PI_GPIO_LIB
+/* Move it to Build Settings */
+//#define PI_ENVALUATE_GPIO_LIB
+//#undef PI_GPIO_LIB
+#if defined RASPI-DEBUG
+	#define PI_GPIO_LIB
+#else
+	#define PI_ENVALUATE_GPIO_LIB
+#endif
 
 #ifdef PI_GPIO_LIB
 	#include <pigpio.h>

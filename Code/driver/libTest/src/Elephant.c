@@ -9,8 +9,10 @@
  */
 
 #include <stdio.h>
-#include <json.h>
+#include "types.h"
 
+#include "gpio.h"
+#include "api.h"
 //int  main()
 //{
 //	cJSON *root = NULL;
@@ -34,7 +36,7 @@
 //{
 //	printf("firmware version: %s\n", getFirmwareVersion());
 //}
-
+/*
 int main()
 {
 	struct json_object * aaa;
@@ -42,5 +44,11 @@ int main()
 	printf("%s\n",json_object_to_json_string(aaa));
 	return 1;
 }
+*/
+int main()
+{
+	printf("firmware version: %s\n", getFirmwareVersion());
+	raspiGpioInit();
 
+}
 
