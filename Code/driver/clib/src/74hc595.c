@@ -85,6 +85,10 @@ void setAll595Buf()
 {
 	u16ExIOBuf = 0xffff;
 }
+void set595Buf(uint16_t data)
+{
+	u16ExIOBuf = data;
+}
 uint16_t get595Buf()
 {
 	return u16ExIOBuf;

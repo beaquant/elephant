@@ -77,6 +77,8 @@ private slots:
 
     void on_DS_1_clicked();
 
+    void on_Set0xaaaa_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

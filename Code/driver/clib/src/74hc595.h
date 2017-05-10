@@ -62,6 +62,8 @@ extern "C" {
                                 reset595Buf();update595Output()
 #define setAll595Refresh()			\
 								setAll595Buf();update595Output()
+#define set595Refresh(data)			\
+								set595Buf(data);update595Output()
 #define setIoRefresh(index)			\
 				set595BufByBit(index);update595Output()
 #define clrIoRefresh(index)			\
@@ -80,6 +82,8 @@ void clr595BufByBit(uint8_t index);
 void update595Output(void);
 void reset595Buf();
 void setAll595Buf();
+void set595Buf(uint16_t data);
+
 uint16_t get595Buf();
 
 

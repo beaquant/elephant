@@ -317,3 +317,8 @@ void MainWindow::on_DS_1_clicked()
 {
     setOutput(5);
 }
+
+void MainWindow::on_Set0xaaaa_clicked()
+{
+    set595Refresh(0xaaaa);
+}

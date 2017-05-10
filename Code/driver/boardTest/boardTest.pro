@@ -19,7 +19,7 @@ HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
 
-LIBS     += -L/home/eric/github/elephant/Code/driver/clib/Debug -lclib
+LIBS     += -L/home/pi/github/elephant/Code/driver/clib/RASPI-DEBUG -lclib
 
-INCLUDEPATH += /home/eric/github/elephant/Code/driver/clib/src
-DEPENDPATH += /home/eric/github/elephant/Code/driver/clib/src
+INCLUDEPATH += /home/pi/github/elephant/Code/driver/clib/src
+DEPENDPATH += /home/pi/github/elephant/Code/driver/clib/src
