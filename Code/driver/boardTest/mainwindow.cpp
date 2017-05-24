@@ -4,7 +4,8 @@
 #include "74hc595.h"
 #include "piconfig.h"
 #include "gpio.h"
-
+#include "api.h"
+#include "version.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
     int GpioHwVer = raspiGpioHwVer();
     QString HwVer = QString::number(GpioHwVer,10);
     ui->HWVersionText->setText(HwVer);
+    QString ClibVer = getFirmwareVersion();
+    ui->clibVersionText->setText(ClibVer);
+//        QString ClibVer = getVersion();
+//        ui->clibVersionText->setText(ClibVer);
 }
 
 MainWindow::~MainWindow()

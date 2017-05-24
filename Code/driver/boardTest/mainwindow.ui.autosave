@@ -788,7 +788,7 @@
       <x>140</x>
       <y>10</y>
       <width>51</width>
-      <height>23</height>
+      <height>20</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -1029,35 +1029,12 @@
      <rect>
       <x>70</x>
       <y>460</y>
-      <width>101</width>
-      <height>31</height>
+      <width>99</width>
+      <height>27</height>
      </rect>
     </property>
     <property name="text">
      <string>Set0xaaaa</string>
-    </property>
-   </widget>
-   <widget class="QTextBrowser" name="clibVersionText">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>150</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="clibVersion">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>158</y>
-      <width>91</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>gpioVersion:</string>
     </property>
    </widget>
    <zorder>layoutWidget</zorder>
@@ -1125,8 +1102,6 @@
    <zorder>DS_0</zorder>
    <zorder>DS</zorder>
    <zorder>Set0xaaaa</zorder>
-   <zorder>clibVersionText</zorder>
-   <zorder>clibVersion</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1134,7 +1109,7 @@
      <x>0</x>
      <y>0</y>
      <width>1036</width>
-     <height>27</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
@@ -1152,24 +1127,24 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_13"/>
-  <buttongroup name="buttonGroup_14"/>
-  <buttongroup name="buttonGroup_15"/>
-  <buttongroup name="buttonGroup_16"/>
-  <buttongroup name="buttonGroup_17"/>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_18"/>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup_5"/>
-  <buttongroup name="buttonGroup_6"/>
-  <buttongroup name="buttonGroup_7"/>
-  <buttongroup name="buttonGroup_8"/>
   <buttongroup name="buttonGroup_9"/>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="CLRbuttonGroup"/>
+  <buttongroup name="buttonGroup_7"/>
+  <buttongroup name="buttonGroup_6"/>
   <buttongroup name="buttonGroup_10"/>
-  <buttongroup name="buttonGroup_11"/>
+  <buttongroup name="buttonGroup_5"/>
+  <buttongroup name="buttonGroup_15"/>
   <buttongroup name="buttonGroup_12"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_17"/>
+  <buttongroup name="buttonGroup_18"/>
+  <buttongroup name="buttonGroup_14"/>
+  <buttongroup name="buttonGroup_16"/>
+  <buttongroup name="buttonGroup_8"/>
+  <buttongroup name="buttonGroup_11"/>
  </buttongroups>
 </ui>
