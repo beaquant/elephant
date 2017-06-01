@@ -111,25 +111,25 @@ void update595Output(void)
     uint16_t temp;
     temp = u16ExIOBuf;
     HC_LANCH_L(); //latch open
-    usleep(100);
+    usleep(1000);
     HC_CLOCK_L();
-    usleep(100);
+    usleep(1000);
     for(i = 0; i < IO_EX_595_DATA_LEN; i++){
+        HC_CLOCK_L();
+	usleep(1000);
         if(temp & 0x0001){
             HC_DATA_H();
         }
         else{
             HC_DATA_L();
         }
-        usleep(100);
+	usleep(1000);
         HC_CLOCK_H();
-        usleep(1000);
-        HC_CLOCK_L();
         usleep(1000);
         temp >>= 1;
     }
-    usleep(100);
-    HC_LANCH_H();
+    usleep(1000);
+    HC_LANCH_H();  
     usleep(1000);
     HC_LANCH_L();
 }

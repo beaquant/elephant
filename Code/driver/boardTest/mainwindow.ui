@@ -1042,8 +1042,8 @@
      <rect>
       <x>400</x>
       <y>150</y>
-      <width>131</width>
-      <height>31</height>
+      <width>281</width>
+      <height>61</height>
      </rect>
     </property>
    </widget>
@@ -1152,14 +1152,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_13"/>
-  <buttongroup name="buttonGroup_14"/>
-  <buttongroup name="buttonGroup_15"/>
-  <buttongroup name="buttonGroup_16"/>
-  <buttongroup name="buttonGroup_17"/>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_18"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="CLRbuttonGroup"/>
   <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_5"/>
@@ -1167,9 +1161,15 @@
   <buttongroup name="buttonGroup_7"/>
   <buttongroup name="buttonGroup_8"/>
   <buttongroup name="buttonGroup_9"/>
-  <buttongroup name="CLRbuttonGroup"/>
   <buttongroup name="buttonGroup_10"/>
   <buttongroup name="buttonGroup_11"/>
   <buttongroup name="buttonGroup_12"/>
+  <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_14"/>
+  <buttongroup name="buttonGroup_15"/>
+  <buttongroup name="buttonGroup_16"/>
+  <buttongroup name="buttonGroup_17"/>
+  <buttongroup name="buttonGroup_18"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>

@@ -27,7 +27,7 @@
 
 #include "api.h"
 #include <string.h>
-
+#include "version.h"
 
 /*****************************************************************************
 * Define section
@@ -65,7 +65,7 @@
 * e.g.
 *	static uint8_t ufoo;
 *****************************************************************************/
-char * version = "1.0.0";
+//char * version = "1.0.0";
 /* function body */
 
 /*****************************************************************************
@@ -78,7 +78,17 @@ char * version = "1.0.0";
 *****************************************************************************/
 char * getFirmwareVersion(void)
 {
-	return version;
+//	char * ver = version;
+//	sprintf("%s_%s_%s", ver, __DATE__ , __TIME__);
+	char *s = ", ";
+	char *ver = malloc(strlen(version)+strlen(__DATE__)+strlen(__TIME__)+strlen(s)+strlen(s)+1);
+
+	strcpy(ver, version);
+	strcat(ver, s);
+	strcat(ver, __DATE__);
+	strcat(ver, s);
+	strcat(ver, __TIME__);
+	return ver;
 }
 /*
  * 设置系统中泵的数量。
