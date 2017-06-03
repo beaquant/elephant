@@ -105,6 +105,15 @@ void clr595BufByBit(uint8_t index)
 {
     u16ExIOBuf &= ~(0x0001 << index);
 }
+void ctrl595BufByBit(uint8_t index, uint8_t ctrl)
+{
+    if(ctrl == 0){
+    	clr595BufByBit(index);
+    }
+    else{
+    	set595BufByBit(index);
+    }
+}
 void update595Output(void)
 {
     uint8_t i;

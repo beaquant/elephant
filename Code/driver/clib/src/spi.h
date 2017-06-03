@@ -40,6 +40,13 @@ extern "C" {
 * ADT section
 *	add Abstract Data Type definition here
 ***************************************************************************/
+enum{
+	SPI_INDEX_7715 = 0,
+	SPI_INDEX_5541,
+	SPI_INDEX_7805,
+	SPI_INDEX_5615,
+	SPI_INDEX_TOTAL
+};
 
 
 /****************************************************************************

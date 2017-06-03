@@ -39,8 +39,10 @@ extern "C" {
 #define GPIO_OUTPUT_595_DS              5
 #define GPIO_OUTPUT_595_STCP            6
 #define GPIO_OUTPUT_595_SHCP            13
-#define GPIO_OUTPUT_SPI_SIN             10
-#define GPIO_OUTPUT_SPI_SCLK            11
+//#define GPIO_OUTPUT_SPI_SIN             10
+//#define GPIO_OUTPUT_SPI_SCLK            11
+#define GPIO_OUTPUT_SPI_CS_7715            8
+#define GPIO_OUTPUT_SPI_CS_5541            7
 
 #define GPIO_INPUT_AD7715_DOUT          17
 #define GPIO_INPUT_ADS7805_A0           18
@@ -77,8 +79,10 @@ enum{
  GPIO_INDEX_595_DS    ,
  GPIO_INDEX_595_STCP   ,
  GPIO_INDEX_595_SHCP   ,
- GPIO_INDEX_SPI_SIN  ,
- GPIO_INDEX_SPI_SCLK   ,
+// GPIO_INDEX_SPI_SIN  ,
+// GPIO_INDEX_SPI_SCLK   ,
+  GPIO_INDEX_SPI_CS_7715  ,
+  GPIO_INDEX_SPI_CS_5541   ,
 
  GPIO_INDEX_AD7715_DOUT  ,
  GPIO_INDEX_ADS7805_A0   ,

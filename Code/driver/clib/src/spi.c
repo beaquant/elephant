@@ -21,13 +21,21 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
-
+#include "types.h"
+#include "piconfig.h"
+#include "gpio.h"
+#include "74hc595.h"
 
 
 /*****************************************************************************
 * Define section
 * add all #define here
 *****************************************************************************/
+#define SPI_CS_7715(ctrl)		gpioWrite(GPIO_OUTPUT_SPI_CS_7715,       ctrl)
+
+#define SPI_CS_5541(ctrl)		gpioWrite(GPIO_OUTPUT_SPI_CS_5541,       ctrl)
+#define SPI_CS_7805(ctrl)		ctrlIoRefresh(IO_EX_595_BIT3_ADS7805_CS,  ctrl)
+#define SPI_CS_5615(ctrl)		ctrlIoRefresh(IO_EX_595_BIT4_TLC5615_CS,   ctrl)
 
 /****************************************************************************
 * ADT section
@@ -56,7 +64,8 @@
 * e.g.
 *	static uint8_t ufoo;
 *****************************************************************************/
-
+#define SPEED 1000000
+int handler = -1;
 /* function body */
 
 /*****************************************************************************
@@ -67,5 +76,45 @@
 * Return:
 *		what does this function returned?
 *****************************************************************************/
+void raspiSpiDeInit(void)
+{
+	if(handler >= 0){
+		spiClose(handler);
+	}
+}
+void raspiSpiInit(unsigned spiChan, unsigned baud)
+{
+//	handler = spiOpen(spiChan, baud, 0x00e0);
+	handler = spiOpen(0, SPEED, 0x00e0);
+	if(handler >= 0){
+
+	}
+}
+void raspiSpiCsCtrl(unsigned index, unsigned ctrl)
+{
+	switch(index){
+	case SPI_INDEX_7715:
+		SPI_CS_7715(ctrl);
+		break;
+	case SPI_INDEX_5541:
+		SPI_CS_5541(ctrl);
+		break;
+	case SPI_INDEX_7805:
+		SPI_CS_7805(ctrl);
+		break;
+	case SPI_INDEX_5615:
+		SPI_CS_5615(ctrl);
+		break;
+	default:break;
+	}
+}
+void raspiSpiWrite(unsigned index, char * buf, unsigned count)
+{
+	raspiSpiCsCtrl(index, LOW);
+	spiWrite(handler, buf, count);
+	raspiSpiCsCtrl(index, HIGH);
+}
+
+
 
 /********************************End Of File********************************/

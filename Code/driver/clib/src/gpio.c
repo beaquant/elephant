@@ -73,8 +73,11 @@ const gpio_t raspiGpio[RASPI_GPIO_SIZE] = {
 {GPIO_OUTPUT_595_DS,            OUTPUT,         LOW},
 {GPIO_OUTPUT_595_STCP,          OUTPUT,         LOW},
 {GPIO_OUTPUT_595_SHCP,          OUTPUT,         LOW},
-{GPIO_OUTPUT_SPI_SIN,           OUTPUT,         LOW},
-{GPIO_OUTPUT_SPI_SCLK,          OUTPUT,         LOW},
+//{GPIO_OUTPUT_SPI_SIN,           OUTPUT,         LOW},
+//{GPIO_OUTPUT_SPI_SCLK,          OUTPUT,         LOW},
+{GPIO_OUTPUT_SPI_CS_7715,           OUTPUT,         HIGH},
+{GPIO_OUTPUT_SPI_CS_5541,          OUTPUT,         HIGH},
+
 
 {GPIO_INPUT_AD7715_DOUT,        INPUT,          LOW},
 {GPIO_INPUT_ADS7805_A0,         INPUT,          LOW},
@@ -147,16 +150,20 @@ void raspiGpioInit(void)
     gpioSetMode(GPIO_OUTPUT_595_DS,       OUTPUT);
     gpioSetMode(GPIO_OUTPUT_595_STCP,     OUTPUT);
     gpioSetMode(GPIO_OUTPUT_595_SHCP,    OUTPUT);
-    gpioSetMode(GPIO_OUTPUT_SPI_SIN,       OUTPUT);
-    gpioSetMode(GPIO_OUTPUT_SPI_SCLK,       OUTPUT);
+//    gpioSetMode(GPIO_OUTPUT_SPI_SIN,       OUTPUT);
+//    gpioSetMode(GPIO_OUTPUT_SPI_SCLK,       OUTPUT);
+	gpioSetMode(GPIO_OUTPUT_SPI_CS_7715,       OUTPUT);
+	gpioSetMode(GPIO_OUTPUT_SPI_CS_5541,       OUTPUT);
 
     gpioWrite(GPIO_OUTPUT_DAC714_AA0,    1);//default value
     gpioWrite(GPIO_OUTPUT_DAC714_AA1,       1);
     gpioWrite(GPIO_OUTPUT_595_DS,       0);
     gpioWrite(GPIO_OUTPUT_595_STCP,     0);
     gpioWrite(GPIO_OUTPUT_595_SHCP,    0);
-    gpioWrite(GPIO_OUTPUT_SPI_SIN,       0);
-    gpioWrite(GPIO_OUTPUT_SPI_SCLK,       0);
+//    gpioWrite(GPIO_OUTPUT_SPI_SIN,       0);
+//    gpioWrite(GPIO_OUTPUT_SPI_SCLK,       0);
+    gpioWrite(GPIO_OUTPUT_SPI_CS_7715,       1);
+    gpioWrite(GPIO_OUTPUT_SPI_CS_5541,       1);
 
 }
 /****************************************************************/

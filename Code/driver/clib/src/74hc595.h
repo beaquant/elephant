@@ -58,16 +58,18 @@ extern "C" {
 // #define IO_EX_595_PIN_STCP					    6
 // #define IO_EX_595_PIN_SHCP					    13
 
-#define reset595Refresh()			\
+#define reset595Refresh()				\
                                 reset595Buf();update595Output()
-#define setAll595Refresh()			\
+#define setAll595Refresh()				\
 								setAll595Buf();update595Output()
 #define set595Refresh(data)			\
 								set595Buf(data);update595Output()
-#define setIoRefresh(index)			\
+#define setIoRefresh(index)				\
 				set595BufByBit(index);update595Output()
-#define clrIoRefresh(index)			\
+#define clrIoRefresh(index)				\
 				clr595BufByBit(index);update595Output()
+#define ctrlIoRefresh(index, ctrl)		\
+				ctrl595BufByBit(index, ctrl);update595Output()
 /****************************************************************************
 * ADT section
 *	add Abstract Data Type definition here
@@ -79,6 +81,8 @@ extern "C" {
 ***************************************************************************/
 void set595BufByBit(uint8_t index);
 void clr595BufByBit(uint8_t index);
+void ctrl595BufByBit(uint8_t index, uint8_t ctrl);
+
 void update595Output(void);
 void reset595Buf();
 void setAll595Buf();
