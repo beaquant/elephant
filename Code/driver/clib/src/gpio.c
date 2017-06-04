@@ -43,15 +43,6 @@ typedef struct{
     unsigned int gpiopresstype;
 }gpio_read_t;
 
-//
-//gpio_read_t gpio_read[MAX_GPIO_INPUT] = {
-//    {GPIO_INPUT_LEFT,           0, 0},
-//    {GPIO_INPUT_RIGHT,          0, 0},
-//    {GPIO_INPUT_UP,             0, 0},
-//    {GPIO_INPUT_DOWN,           0, 0},
-//    {GPIO_INPUT_PWM_1_POS,      0, 0},
-//    {GPIO_INPUT_PWM_2_POS,      0, 0}
-//};
 
 /******************************************************************************
 * Function prototype section
@@ -68,6 +59,7 @@ typedef struct{
 
 
 const gpio_t raspiGpio[RASPI_GPIO_SIZE] = {
+/* output */
 {GPIO_OUTPUT_DAC714_AA0,        OUTPUT,         HIGH},
 {GPIO_OUTPUT_DAC714_AA1,        OUTPUT,         HIGH},
 {GPIO_OUTPUT_595_DS,            OUTPUT,         LOW},
@@ -78,7 +70,7 @@ const gpio_t raspiGpio[RASPI_GPIO_SIZE] = {
 {GPIO_OUTPUT_SPI_CS_7715,           OUTPUT,         HIGH},
 {GPIO_OUTPUT_SPI_CS_5541,          OUTPUT,         HIGH},
 
-
+/* input */
 {GPIO_INPUT_AD7715_DOUT,        INPUT,          LOW},
 {GPIO_INPUT_ADS7805_A0,         INPUT,          LOW},
 {GPIO_INPUT_ADS7805_A1,         INPUT,          LOW},
@@ -110,7 +102,32 @@ int raspiGpioVer(void)
 {
     return gpioVersion();
 }
+void raspiGpioSetMode(int gpio, int mode)
+{
+    if(mode == INPUT){
+    	gpioSetMode(gpio,         INPUT);
+        gpioGlitchFilter(gpio,         GPIO_INPUT_STEADY_FILTER);
+    }
+    else if(mode == OUTPUT){
+    	gpioSetMode(gpio,         OUTPUT);
+    }
+}
+void setOutput(uint16_t index)
+{
+	gpioWrite(index,    1);
+}
+void clrOutput(uint16_t index)
+{
+	gpioWrite(index,    0);
+}
+void raspiGpioOutputCtrl(int gpio, int ctrl)
+{
+	gpioWrite(gpio,         ctrl);
+}
+
+
 /****************************************************************/
+#if 0
 void raspiGpioInit(void)
 {
 	int ret = gpioInitialise();
@@ -174,20 +191,50 @@ void raspiGpioDeInit(void)
     gpioWrite(GPIO_OUTPUT_595_DS,       0);
     gpioWrite(GPIO_OUTPUT_595_STCP,     0);
     gpioWrite(GPIO_OUTPUT_595_SHCP,    0);
-    gpioWrite(GPIO_OUTPUT_SPI_SIN,       0);
-    gpioWrite(GPIO_OUTPUT_SPI_SCLK,       0);
+//    gpioWrite(GPIO_OUTPUT_SPI_SIN,       0);
+//    gpioWrite(GPIO_OUTPUT_SPI_SCLK,       0);
     gpioTerminate();
 }
+#else
+void raspiGpioInit(void)
+{
+    int i;
+    int ret = gpioInitialise();
+
+    if (ret<0) {
+    	printf("gpio initialise fail\n");
+    	return ;
+    }
+    printf("gpio initialise success:%d\n",ret);
+    printf("gpioHardwareRevision:%d\n",raspiGpioHwVer());
+    printf("raspiGpioVer:%d\n",raspiGpioVer());
+
+    for(i = 0; i < RASPI_GPIO_SIZE; i++){
+    	if(raspiGpio[i].dir == OUTPUT){
+    		gpioSetMode(raspiGpio[i].gpio,    OUTPUT);
+    		gpioWrite(raspiGpio[i].gpio,       raspiGpio[i].defaultValue);
+    	}
+    	else if (raspiGpio[i].dir == INPUT){
+    		gpioSetMode(raspiGpio[i].gpio,    INPUT);
+    		gpioGlitchFilter(raspiGpio[i].gpio,         GPIO_INPUT_STEADY_FILTER);
+    	}
+    }
+}
+/****************************************************************/
+void raspiGpioDeInit(void)
+{
+    int i;
+    for(i = 0; i < RASPI_GPIO_SIZE; i++){
+    	if(raspiGpio[i].dir == OUTPUT){
+    		gpioWrite(raspiGpio[i].gpio,       raspiGpio[i].defaultValue);
+    	}
+    }
+    gpioTerminate();
+}
+#endif
 
 
-void setOutput(uint16_t index)
-{
-	gpioWrite(index,    1);
-}
-void clrOutput(uint16_t index)
-{
-	gpioWrite(index,    0);
-}
+
 
 
 /********************************End Of File********************************/

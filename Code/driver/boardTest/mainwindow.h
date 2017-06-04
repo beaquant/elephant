@@ -79,6 +79,15 @@ private slots:
 
     void on_Set0xaaaa_clicked();
 
+
+    void on_Update_to_U6_7_clicked();
+
+    void on_DisableSPI_stateChanged(int arg1);
+
+    void on_OUTPUT_0_clicked();
+
+    void on_OUTPUT_1_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

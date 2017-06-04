@@ -23,6 +23,7 @@
 *****************************************************************************/
 #include "types.h"
 #include "74hc595.h"
+#include "spi.h"
 
 
 
@@ -30,7 +31,7 @@
 * Define section
 * add all #define here
 *****************************************************************************/
-
+#define V_REF_2500_MV					2500
 /****************************************************************************
 * ADT section
 *	add definition of user defined Data Type that only be used in this file  here
@@ -74,19 +75,31 @@ void tlc5615Init(void)
 	
 }
 
-void tlc5615Set(uint16_t data_a, uint16_t data_b)
+void tlc5615Set(uint16_t a_mv, uint16_t b_mv)
 {
-	uint8_t byte0, byte1;
-	clrIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
-	byte0 = (data_b >> 8);
-	byte1 = data_b & 0xFF;
-//	SPI.transfer(byte0);
-//	SPI.transfer(byte1);
-	byte0 = (data_a >> 8);
-	byte1 = data_a & 0xFF;
-//	SPI.transfer(byte0);
-//	SPI.transfer(byte1);
-	
-	setIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
+//	uint8_t byte0, byte1;
+//	clrIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
+//	byte0 = (data_b >> 8);
+//	byte1 = data_b & 0xFF;
+////	SPI.transfer(byte0);
+////	SPI.transfer(byte1);
+//	byte0 = (data_a >> 8);
+//	byte1 = data_a & 0xFF;
+////	SPI.transfer(byte0);
+////	SPI.transfer(byte1);
+//
+//	setIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
+	uint16_t data_a,  data_b;
+	uint8_t buf[4];
+
+	data_a = (a_mv*1024)/(2*V_REF_2500_MV);
+	data_b = (b_mv*1024)/(2*V_REF_2500_MV);
+
+	buf[0] = (data_b >> 8);
+	buf[1] = data_b & 0xFF;
+	buf[2] = (data_a >> 8);
+	buf[3] = data_a & 0xFF;
+	raspiSpiWrite(SPI_INDEX_5615, (char *)buf, 4);
+
 }
 /********************************End Of File********************************/

@@ -25,7 +25,8 @@
 #include "piconfig.h"
 #include "gpio.h"
 #include "74hc595.h"
-
+#include "spi.h"
+#include <stdio.h>
 
 /*****************************************************************************
 * Define section
@@ -65,6 +66,7 @@
 *	static uint8_t ufoo;
 *****************************************************************************/
 #define SPEED 1000000
+#define SPI_5615_SPEED		30000
 int handler = -1;
 /* function body */
 
@@ -87,7 +89,7 @@ void raspiSpiInit(unsigned spiChan, unsigned baud)
 //	handler = spiOpen(spiChan, baud, 0x00e0);
 	handler = spiOpen(0, SPEED, 0x00e0);
 	if(handler >= 0){
-
+		printf("spi init success\n");
 	}
 }
 void raspiSpiCsCtrl(unsigned index, unsigned ctrl)

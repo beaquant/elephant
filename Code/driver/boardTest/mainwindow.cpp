@@ -6,6 +6,8 @@
 #include "gpio.h"
 #include "api.h"
 #include "version.h"
+#include "tlc5615.h"
+#include "spi.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     raspiGpioInit();
+    raspiSpiInit(0,0);
     int GpioVer = raspiGpioVer();
     QString Ver = QString::number(GpioVer,10);
     ui->gpioVersionText->setText(Ver);
@@ -208,7 +211,7 @@ void MainWindow::on_Reset595_clicked()
     ui->HC595PIN15_0->setChecked(true);
 
 }
-/*
+
 void MainWindow::on_Get595_clicked()
 {
     uint16_t dat = get595Buf();
@@ -218,80 +221,103 @@ void MainWindow::on_Get595_clicked()
     else{
         ui->HC595PIN0_0->setChecked(true);
     }
-    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+    if(dat & 0x0002){
+        ui->HC595PIN1_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
+        ui->HC595PIN1_0->setChecked(true);
     }
-    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
-    }
-    else{
-        ui->HC595PIN0_0->setChecked(true);
-    }
-    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+    if(dat & 0x0004){
+        ui->HC595PIN2_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
+        ui->HC595PIN2_0->setChecked(true);
     }
-    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
-    }
-    else{
-        ui->HC595PIN0_0->setChecked(true);
-    }    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+    if(dat & 0x0008){
+        ui->HC595PIN3_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
-    }    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+        ui->HC595PIN3_0->setChecked(true);
+    }
+    if(dat & 0x0010){
+        ui->HC595PIN4_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
+        ui->HC595PIN4_0->setChecked(true);
     }
-    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
-    }
-    else{
-        ui->HC595PIN0_0->setChecked(true);
-    }    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+    if(dat & 0x0020){
+        ui->HC595PIN5_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
-    }    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+        ui->HC595PIN5_0->setChecked(true);
+    }
+    if(dat & 0x0040){
+        ui->HC595PIN6_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
-    }    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+        ui->HC595PIN6_0->setChecked(true);
+    }
+    if(dat & 0x0080){
+        ui->HC595PIN7_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
-    }    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+        ui->HC595PIN7_0->setChecked(true);
+    }
+    if(dat & 0x0100){
+        ui->HC595PIN8_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
+        ui->HC595PIN8_0->setChecked(true);
     }
-    if(dat & 0x0001){
-        ui->HC595PIN0_1->setChecked(true);
+    if(dat & 0x0200){
+        ui->HC595PIN9_1->setChecked(true);
     }
     else{
-        ui->HC595PIN0_0->setChecked(true);
+        ui->HC595PIN9_0->setChecked(true);
     }
-
+    if(dat & 0x0400){
+        ui->HC595PIN10_1->setChecked(true);
+    }
+    else{
+        ui->HC595PIN10_0->setChecked(true);
+    }
+    if(dat & 0x0800){
+        ui->HC595PIN11_1->setChecked(true);
+    }
+    else{
+        ui->HC595PIN11_0->setChecked(true);
+    }
+    if(dat & 0x1000){
+        ui->HC595PIN12_1->setChecked(true);
+    }
+    else{
+        ui->HC595PIN12_0->setChecked(true);
+    }
+    if(dat & 0x2000){
+        ui->HC595PIN13_1->setChecked(true);
+    }
+    else{
+        ui->HC595PIN13_0->setChecked(true);
+    }
+    if(dat & 0x4000){
+        ui->HC595PIN14_1->setChecked(true);
+    }
+    else{
+        ui->HC595PIN14_0->setChecked(true);
+    }
+    if(dat & 0x8000){
+        ui->HC595PIN15_1->setChecked(true);
+    }
+    else{
+        ui->HC595PIN15_0->setChecked(true);
+    }
 }
-*/
+/**/
 
-void MainWindow::on_Get595_clicked()
-{
+//void MainWindow::on_Get595_clicked()
+//{
 
-}
+//}
 
 void MainWindow::on_STCP_0_clicked()
 {
@@ -326,4 +352,50 @@ void MainWindow::on_DS_1_clicked()
 void MainWindow::on_Set0xaaaa_clicked()
 {
     set595Refresh(0xaaaa);
+}
+
+
+
+void MainWindow::on_Update_to_U6_7_clicked()
+{
+    int a = ui->TCL5615_U6->value();
+    int b = ui->TCL5615_U7->value();
+    QString s;
+    s.sprintf("a=%d, b=%d\n", a,b);
+    ui->debugInfo->setText(s);
+    tlc5615Set(a,b);
+}
+
+void MainWindow::on_DisableSPI_stateChanged(int arg1)
+{
+    QString s;
+    s.sprintf("arg1=%d\n", arg1);
+    ui->debugInfo->setText(s);
+    if(arg1 == 0){
+        raspiSpiInit(0,0);
+    }
+    else if(arg1 == 2){
+        raspiSpiDeInit();
+        raspiGpioSetMode(GPIO_OUTPUT_SPI_SIN,       OUTPUT);
+        raspiGpioSetMode(GPIO_OUTPUT_SPI_SCLK,       OUTPUT);
+    }
+}
+
+void MainWindow::on_OUTPUT_0_clicked()
+{
+    int gpio = ui->GPIO->value();
+    clrOutput(gpio);
+    QString s;
+    s.sprintf("gpio=%d\n", gpio);
+    ui->debugInfo->setText(s);
+
+}
+
+void MainWindow::on_OUTPUT_1_clicked()
+{
+    int gpio = ui->GPIO->value();
+    setOutput(gpio);
+    QString s;
+    s.sprintf("gpio=%d\n", gpio);
+    ui->debugInfo->setText(s);
 }

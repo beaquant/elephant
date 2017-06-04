@@ -7,4 +7,4 @@
 
 #include "version.h"
 
-char * version = "1.0.1";
+char * version = "1.0.2";

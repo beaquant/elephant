@@ -39,8 +39,8 @@ extern "C" {
 #define GPIO_OUTPUT_595_DS              5
 #define GPIO_OUTPUT_595_STCP            6
 #define GPIO_OUTPUT_595_SHCP            13
-//#define GPIO_OUTPUT_SPI_SIN             10
-//#define GPIO_OUTPUT_SPI_SCLK            11
+#define GPIO_OUTPUT_SPI_SIN             10
+#define GPIO_OUTPUT_SPI_SCLK            11
 #define GPIO_OUTPUT_SPI_CS_7715            8
 #define GPIO_OUTPUT_SPI_CS_5541            7
 
@@ -112,7 +112,8 @@ int raspiGpioVer(void);
 int raspiGpioHwVer(void);
 void setOutput(uint16_t index);
 void clrOutput(uint16_t index);
-
+void raspiGpioOutputCtrl(int gpio, int ctrl);
+void raspiGpioSetMode(int gpio, int mode);
 
 
 #ifdef __cplusplus

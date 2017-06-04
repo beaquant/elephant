@@ -18,8 +18,8 @@
 *   except by express written agreement with Zhihao.
 *****************************************************************************/
 
-#ifndef _TEMPLATE_H_
-#define _TEMPLATE_H_
+#ifndef _SPI_H_
+#define _SPI_H_
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,6 +58,10 @@ enum{
 *  section
 *	add function prototype here if any
 ***************************************************************************/
+void raspiSpiDeInit(void);
+void raspiSpiInit(unsigned spiChan, unsigned baud);
+//void raspiSpiCsCtrl(unsigned index, unsigned ctrl);
+void raspiSpiWrite(unsigned index, char * buf, unsigned count);
 
 
 

@@ -24,3 +24,8 @@ LIBS     +=  -lclib
 
 INCLUDEPATH += /home/pi/github/elephant/Code/driver/clib/src
 DEPENDPATH += /home/pi/github/elephant/Code/driver/clib/src
+
+DISTFILES +=
+
+RESOURCES += \
+    resoure.qrc
