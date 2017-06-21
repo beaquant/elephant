@@ -126,7 +126,7 @@ void update595Output(void)
     for(i = 0; i < IO_EX_595_DATA_LEN; i++){
         HC_CLOCK_L();
 	usleep(1000);
-        if(temp & 0x0001){
+        if(temp & 0x8000){
             HC_DATA_H();
         }
         else{
@@ -135,7 +135,7 @@ void update595Output(void)
 	usleep(1000);
         HC_CLOCK_H();
         usleep(1000);
-        temp >>= 1;
+        temp <<= 1;
     }
     usleep(1000);
     HC_LANCH_H();  

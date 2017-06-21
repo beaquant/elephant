@@ -77,24 +77,16 @@ void tlc5615Init(void)
 
 void tlc5615Set(uint16_t a_mv, uint16_t b_mv)
 {
-//	uint8_t byte0, byte1;
-//	clrIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
-//	byte0 = (data_b >> 8);
-//	byte1 = data_b & 0xFF;
-////	SPI.transfer(byte0);
-////	SPI.transfer(byte1);
-//	byte0 = (data_a >> 8);
-//	byte1 = data_a & 0xFF;
-////	SPI.transfer(byte0);
-////	SPI.transfer(byte1);
-//
-//	setIoRefresh(IO_EX_595_BIT4_TLC5615_CS);
 	uint16_t data_a,  data_b;
 	uint8_t buf[4];
+	if(a_mv >5000 || b_mv >5000){
+		return;// do nothing
+	}
+	data_a = (a_mv*1024)/(2*V_REF_2500_MV) - 1;
+	data_b = (b_mv*1024)/(2*V_REF_2500_MV) - 1;
 
-	data_a = (a_mv*1024)/(2*V_REF_2500_MV);
-	data_b = (b_mv*1024)/(2*V_REF_2500_MV);
-
+	data_a <<= 2;
+	data_b <<= 2;
 	buf[0] = (data_b >> 8);
 	buf[1] = data_b & 0xFF;
 	buf[2] = (data_a >> 8);
