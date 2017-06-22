@@ -24,6 +24,7 @@
 #include "types.h"
 #include "piconfig.h"
 #include "74hc595.h"
+#include "ads7805.h"
 #include "gpio.h"
 
 
@@ -59,6 +60,7 @@ enum{
 *	int8_t foo;
 ****************************************************************************/
 uint8_t ads7805State = 0;
+uint16_t ads7805DATA = 0;
 
 /*****************************************************************************
 * Global variables section - Local
@@ -149,14 +151,28 @@ void ads7805StateUpdate(void)
         ads7805State = ADS7805STATE_GETDATA;
     break;
     case ADS7805STATE_GETDATA:
-        ads7805GetData();
+    	ads7805DATA = ads7805GetData();
         ads7805State = ADS7805STATE_IDLE;
     break;
-    
-    
     default:break;
     }
-
 }
-
+uint8_t ads7805Start(void)
+{
+	if(ads7805State != ADS7805STATE_IDLE){
+		return ADS7805_NOK_BUSY;
+	}else{
+		ads7805State = ADS7805STATE_START_CONV;
+		return ADS7805_OK;
+	}
+}
+uint8_t ads7805Result(uint16_t * data)
+{
+	if(ads7805State != ADS7805STATE_IDLE){
+		return ADS7805_NOK_BUSY;
+	}else{
+		* data = ads7805DATA;
+		return ADS7805_OK;
+	}
+}
 /********************************End Of File********************************/

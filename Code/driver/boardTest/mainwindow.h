@@ -88,6 +88,10 @@ private slots:
 
     void on_OUTPUT_1_clicked();
 
+    void on_Start7805_clicked();
+
+    void on_Get7805Result_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

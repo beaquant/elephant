@@ -8,6 +8,7 @@
 #include "version.h"
 #include "tlc5615.h"
 #include "spi.h"
+#include "ads7805.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -531,4 +532,29 @@ void MainWindow::on_OUTPUT_1_clicked()
     QString s;
     s.sprintf("gpio=%d\n", gpio);
     ui->debugInfo->setText(s);
+}
+
+void MainWindow::on_Start7805_clicked()
+{
+    int ret = ads7805Start();
+    if(ret == ADS7805_OK){
+        ui->ADS7805Status->setText("ADS7805 started to conversion");
+    }else{
+        ui->ADS7805Status->setText("ADS7805 busy");
+    }
+}
+
+void MainWindow::on_Get7805Result_clicked()
+{
+    uint16_t result = 0;
+    int ret = ads7805Result(&result);
+    if(ret == ADS7805_OK){
+        ui->ADS7805Status->setText("ADS7805 conversion finished");
+        QString s;
+        s.sprintf("%d", result);
+        ui->ADS7805Result->setText(s);
+    }else{
+        ui->ADS7805Status->setText("ADS7805 busy");
+    }
+
 }

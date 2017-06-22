@@ -1046,7 +1046,7 @@
      <rect>
       <x>270</x>
       <y>562</y>
-      <width>251</width>
+      <width>201</width>
       <height>31</height>
      </rect>
     </property>
@@ -1177,7 +1177,7 @@
    <widget class="QTextBrowser" name="debugInfo">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>540</x>
       <y>400</y>
       <width>256</width>
       <height>192</height>
@@ -1295,6 +1295,78 @@
      <string>Test_UI_Version</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Debug_Info">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>380</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Debug Info</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Start7805">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>140</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start7805</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Get7805Result">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>170</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Get7805Result</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="ADS7805Result">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>170</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_24">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>180</y>
+      <width>41</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>mV</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="ADS7805Status">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>140</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>HC595PIN1_0</zorder>
    <zorder>label</zorder>
@@ -1380,6 +1452,12 @@
    <zorder>DISPLAY_ADS7805</zorder>
    <zorder>ADS7805</zorder>
    <zorder>Test_UI_Version</zorder>
+   <zorder>Debug_Info</zorder>
+   <zorder>Start7805</zorder>
+   <zorder>Get7805Result</zorder>
+   <zorder>ADS7805Result</zorder>
+   <zorder>label_24</zorder>
+   <zorder>ADS7805Status</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1407,24 +1485,24 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_5"/>
-  <buttongroup name="buttonGroup_15"/>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_7"/>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="buttonGroup_12"/>
   <buttongroup name="buttonGroup_18"/>
-  <buttongroup name="buttonGroup_14"/>
-  <buttongroup name="buttonGroup_17"/>
-  <buttongroup name="buttonGroup_6"/>
-  <buttongroup name="buttonGroup_8"/>
-  <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="buttonGroup_9"/>
   <buttongroup name="buttonGroup_16"/>
-  <buttongroup name="buttonGroup_10"/>
-  <buttongroup name="buttonGroup_3"/>
   <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_9"/>
   <buttongroup name="CLRbuttonGroup"/>
+  <buttongroup name="buttonGroup_5"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_10"/>
+  <buttongroup name="buttonGroup_15"/>
+  <buttongroup name="buttonGroup_14"/>
+  <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_17"/>
+  <buttongroup name="buttonGroup_7"/>
+  <buttongroup name="buttonGroup_6"/>
+  <buttongroup name="buttonGroup_12"/>
+  <buttongroup name="buttonGroup_4"/>
   <buttongroup name="buttonGroup_11"/>
+  <buttongroup name="buttonGroup_8"/>
+  <buttongroup name="buttonGroup_3"/>
  </buttongroups>
 </ui>

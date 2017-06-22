@@ -34,7 +34,10 @@ extern "C" {
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-
+enum{
+	ADS7805_OK = 0,
+	ADS7805_NOK_BUSY
+};
 
 /****************************************************************************
 * ADT section
@@ -57,6 +60,8 @@ uint8_t ads7805ConversionStatus(void);
 uint16_t ads7805GetData(void);
 
 
+uint8_t ads7805Start(void);
+uint8_t ads7805Result(uint16_t * data);
 
 
 #ifdef __cplusplus
