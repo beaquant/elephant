@@ -21,11 +21,17 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
+#include <stdio.h>
+#include <pthread.h>
 #include "types.h"
 #include "piconfig.h"
 #include "74hc595.h"
 #include "ads7805.h"
 #include "gpio.h"
+#include"logger.h"
+#include <errno.h>
+#include<string.h>
+#include <unistd.h>
 
 
 
@@ -61,6 +67,7 @@ enum{
 ****************************************************************************/
 uint8_t ads7805State = 0;
 uint16_t ads7805DATA = 0;
+pthread_t       ads7805Tid;
 
 /*****************************************************************************
 * Global variables section - Local
@@ -157,6 +164,21 @@ void ads7805StateUpdate(void)
     default:break;
     }
 }
+
+void ads7805StateHandler(void *arg)
+{
+	LOG_PRINT("ads7805StateHandler thread begin  %ld  \n", ads7805Tid);
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);           //允许退出线程
+    pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS,   NULL);   //设置立即取消
+	while(1){
+		ads7805StateUpdate();
+		if(ads7805State == ADS7805STATE_IDLE){
+			sleep(1);
+		}
+	}
+}
+
+
 uint8_t ads7805Start(void)
 {
 	if(ads7805State != ADS7805STATE_IDLE){
@@ -168,11 +190,24 @@ uint8_t ads7805Start(void)
 }
 uint8_t ads7805Result(uint16_t * data)
 {
+	printf("ads7805State:%d\n",ads7805State);
 	if(ads7805State != ADS7805STATE_IDLE){
 		return ADS7805_NOK_BUSY;
 	}else{
 		* data = ads7805DATA;
 		return ADS7805_OK;
 	}
+}
+
+void ads7805Init(void)
+{
+    int err;
+
+	err = pthread_create(&ads7805Tid, NULL, (void *)ads7805StateHandler, NULL);
+    if ( 0 != err ){
+    	LOG_PRINT("can't create thread for oem response handler:%s\n", strerror(err));
+    }
+    LOG_PRINT("%ld running\n", ads7805Tid);
+
 }
 /********************************End Of File********************************/

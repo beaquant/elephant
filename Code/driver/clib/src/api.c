@@ -21,12 +21,13 @@
 *	Include Section
 *	add all #include here
 *****************************************************************************/
+#include <string.h>
+#include <stdlib.h>
 #include "types.h"
 #include "sysconfig.h"
 #include "pump.h"
 
 #include "api.h"
-#include <string.h>
 #include "version.h"
 
 /*****************************************************************************

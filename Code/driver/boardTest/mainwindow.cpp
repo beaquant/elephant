@@ -10,14 +10,17 @@
 #include "spi.h"
 #include "ads7805.h"
 
+QString UI_VERSION = "GUI: V1.1.0";
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->Test_UI_Version->setText("hello");
     ui->setupUi(this);
+    ui->Test_UI_Version->setText(UI_VERSION);
     raspiGpioInit();
     raspiSpiInit(0,0);
+    ads7805Init();
+
     int GpioVer = raspiGpioVer();
     QString Ver = QString::number(GpioVer,10);
     ui->gpioVersionText->setText(Ver);
