@@ -81,7 +81,16 @@ uint16_t u16ExIOBuf;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
-void setAll595Buf()
+void hc595Init(void)
+{
+	uint16_t buf = 0;
+//	buf |= 1 << IO_EX_595_BIT3_ADS7805_CS;//make cs7805 stay low
+	buf |= 1 << IO_EX_595_BIT4_TLC5615_CS;
+
+	u16ExIOBuf = buf;
+	update595Output();
+}
+void setAll595Buf(void)
 {
 	u16ExIOBuf = 0xffff;
 }
@@ -89,11 +98,11 @@ void set595Buf(uint16_t data)
 {
 	u16ExIOBuf = data;
 }
-uint16_t get595Buf()
+uint16_t get595Buf(void)
 {
 	return u16ExIOBuf;
 }
-void reset595Buf()
+void reset595Buf(void)
 {
     u16ExIOBuf = 0;
 }

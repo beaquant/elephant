@@ -34,14 +34,14 @@ extern "C" {
 * #define section
 *	add constant #define here if any
 ***************************************************************************/
-#define IO_EX_595_BIT0_DAC714_CLR				0
+#define IO_EX_595_BIT0_DAC714_CLR					0
 #define IO_EX_595_BIT1_ADS7805_BYTE				1
 #define IO_EX_595_BIT2_ADS7805_R_C				2
 #define IO_EX_595_BIT3_ADS7805_CS				3
-#define IO_EX_595_BIT4_TLC5615_CS				4
+#define IO_EX_595_BIT4_TLC5615_CS					4
 #define IO_EX_595_BIT5_SN74F575_SNCLK			5
-#define IO_EX_595_BIT6_RESERVED_BUSY		    6
-#define IO_EX_595_BIT7_RESERVED			7
+#define IO_EX_595_BIT6_RESERVED_1				    6
+#define IO_EX_595_BIT7_RESERVED						7
 
 #define IO_EX_595_BIT8_SN74F575_PTD0			8
 #define IO_EX_595_BIT9_SN74F575_PTD1			9
@@ -89,6 +89,7 @@ void setAll595Buf();
 void set595Buf(uint16_t data);
 
 uint16_t get595Buf();
+void hc595Init(void);
 
 
 /****************************************************************************
