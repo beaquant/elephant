@@ -18,8 +18,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->Test_UI_Version->setText(UI_VERSION);
     raspiGpioInit();
+    hc595Init();
     raspiSpiInit(0,0);
     ads7805Init();
+
+    on_Get595_clicked();
 
     int GpioVer = raspiGpioVer();
     QString Ver = QString::number(GpioVer,10);
@@ -148,7 +151,7 @@ void MainWindow::on_HC595PIN5_1_clicked()
 }
 void MainWindow::on_HC595PIN6_0_clicked()
 {
-    clrIoRefresh(IO_EX_595_BIT6_RESERVED_BUSY);
+    clrIoRefresh(IO_EX_595_BIT6_RESERVED_1);
     int dat = get595Buf();
     QString s;
     s.sprintf("0x%x\n", dat);
@@ -157,7 +160,7 @@ void MainWindow::on_HC595PIN6_0_clicked()
 
 void MainWindow::on_HC595PIN6_1_clicked()
 {
-    setIoRefresh(IO_EX_595_BIT6_RESERVED_BUSY);
+    setIoRefresh(IO_EX_595_BIT6_RESERVED_1);
     int dat = get595Buf();
     QString s;
     s.sprintf("0x%x\n", dat);
