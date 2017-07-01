@@ -1187,8 +1187,8 @@
    <widget class="QSpinBox" name="GPIO">
     <property name="geometry">
      <rect>
-      <x>261</x>
-      <y>385</y>
+      <x>454</x>
+      <y>306</y>
       <width>71</width>
       <height>27</height>
      </rect>
@@ -1197,8 +1197,8 @@
    <widget class="QRadioButton" name="OUTPUT_1">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>390</y>
+      <x>563</x>
+      <y>311</y>
       <width>20</width>
       <height>17</height>
      </rect>
@@ -1210,8 +1210,8 @@
    <widget class="QRadioButton" name="OUTPUT_0">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>390</y>
+      <x>533</x>
+      <y>311</y>
       <width>20</width>
       <height>17</height>
      </rect>
@@ -1220,20 +1220,20 @@
      <string/>
     </property>
     <property name="checked">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_23">
     <property name="geometry">
      <rect>
-      <x>207</x>
-      <y>389</y>
-      <width>51</width>
+      <x>370</x>
+      <y>310</y>
+      <width>81</width>
       <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>GPIO</string>
+     <string>Write GPIO</string>
     </property>
    </widget>
    <widget class="QLabel" name="CHIP74HC595">
@@ -1325,7 +1325,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>190</y>
+      <y>210</y>
       <width>111</width>
       <height>27</height>
      </rect>
@@ -1338,7 +1338,7 @@
     <property name="geometry">
      <rect>
       <x>410</x>
-      <y>190</y>
+      <y>210</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -1348,7 +1348,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>200</y>
+      <y>220</y>
       <width>41</width>
       <height>20</height>
      </rect>
@@ -1365,6 +1365,77 @@
       <width>151</width>
       <height>51</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Stop7805">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>176</y>
+      <width>111</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop7805</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="INPUT_0">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>533</x>
+      <y>351</y>
+      <width>20</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="INPUT_1">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>563</x>
+      <y>351</y>
+      <width>20</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="GPIO_2">
+    <property name="geometry">
+     <rect>
+      <x>454</x>
+      <y>346</y>
+      <width>71</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ReaGpio">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>346</y>
+      <width>91</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Read GPIO</string>
     </property>
    </widget>
    <zorder>layoutWidget</zorder>
@@ -1458,6 +1529,11 @@
    <zorder>ADS7805Result</zorder>
    <zorder>label_24</zorder>
    <zorder>ADS7805Status</zorder>
+   <zorder>Stop7805</zorder>
+   <zorder>INPUT_0</zorder>
+   <zorder>INPUT_1</zorder>
+   <zorder>GPIO_2</zorder>
+   <zorder>ReaGpio</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1485,24 +1561,24 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_18"/>
+  <buttongroup name="buttonGroup_4"/>
+  <buttongroup name="buttonGroup_17"/>
+  <buttongroup name="buttonGroup_5"/>
   <buttongroup name="buttonGroup_11"/>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_3"/>
+  <buttongroup name="buttonGroup_7"/>
+  <buttongroup name="CLRbuttonGroup"/>
+  <buttongroup name="buttonGroup_13"/>
+  <buttongroup name="buttonGroup_12"/>
   <buttongroup name="buttonGroup_16"/>
+  <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup_10"/>
+  <buttongroup name="buttonGroup_14"/>
+  <buttongroup name="buttonGroup_6"/>
+  <buttongroup name="buttonGroup_15"/>
   <buttongroup name="buttonGroup_8"/>
   <buttongroup name="buttonGroup_9"/>
-  <buttongroup name="buttonGroup_2"/>
-  <buttongroup name="buttonGroup_6"/>
-  <buttongroup name="buttonGroup_12"/>
-  <buttongroup name="buttonGroup_3"/>
-  <buttongroup name="buttonGroup_4"/>
-  <buttongroup name="CLRbuttonGroup"/>
-  <buttongroup name="buttonGroup_15"/>
-  <buttongroup name="buttonGroup_5"/>
-  <buttongroup name="buttonGroup_14"/>
-  <buttongroup name="buttonGroup_10"/>
-  <buttongroup name="buttonGroup_18"/>
-  <buttongroup name="buttonGroup_17"/>
-  <buttongroup name="buttonGroup_7"/>
  </buttongroups>
 </ui>

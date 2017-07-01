@@ -63,6 +63,7 @@ uint16_t ads7805GetData(void);
 uint8_t ads7805Start(void);
 uint8_t ads7805Result(uint16_t * data);
 void ads7805Init(void);
+uint8_t ads7805Stop(void);
 
 
 #ifdef __cplusplus

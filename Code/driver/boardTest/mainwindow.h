@@ -92,6 +92,10 @@ private slots:
 
     void on_Get7805Result_clicked();
 
+    void on_Stop7805_clicked();
+
+    void on_ReaGpio_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

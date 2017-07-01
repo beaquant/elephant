@@ -84,8 +84,10 @@ uint16_t u16ExIOBuf;
 void hc595Init(void)
 {
 	uint16_t buf = 0;
-//	buf |= 1 << IO_EX_595_BIT3_ADS7805_CS;//make cs7805 stay low
+	buf |= 1 << IO_EX_595_BIT2_ADS7805_R_C;//make cs7805 stay low
 	buf |= 1 << IO_EX_595_BIT4_TLC5615_CS;
+//	buf |= 1 << IO_EX_595_BIT3_ADS7805_CS;//high
+
 
 	u16ExIOBuf = buf;
 	update595Output();

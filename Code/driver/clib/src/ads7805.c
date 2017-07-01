@@ -66,7 +66,7 @@ enum{
 *	int8_t foo;
 ****************************************************************************/
 uint8_t ads7805State = 0;
-uint16_t ads7805DATA = 0;
+int16_t ads7805DATA = 0;
 pthread_t       ads7805Tid;
 
 /*****************************************************************************
@@ -87,37 +87,108 @@ pthread_t       ads7805Tid;
 * Return:
 *		what does this function returned?
 *****************************************************************************/
+#if 0
 void ads7805StartConversion(void)//
 {
-    clr595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay low
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
+//    clr595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay low
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
+//    update595Output();
+//
+//    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc falling edge
+//    update595Output();
+//    // usleep(1);
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
+//    update595Output();
+
+	set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
+	update595Output();
+    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//generate falling edge rc
     update595Output();
-    
-    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc falling edge
-    update595Output();
-    // usleep(1);
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
-    update595Output();
+    printf("generate falling edge rc\n");
+//    while(ads7805ConversionStatus() ==1);//make sure 7805 start conversion
+    printf("7805 start conversion, BUSY!\n");
+	set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc return to high
+	update595Output();
 }
 /* when busy is high */
 void ads7805StartOutputData(void)
 {
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
-    set595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay high
-    update595Output();
-    
-    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//cs falling edge
-    update595Output();
-    // usleep(1);
-    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
-    update595Output();
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
+//    set595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay high
+//    update595Output();
+//
+//    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//cs falling edge
+//    update595Output();
+//    // usleep(1);
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
+//    update595Output();
 }
 uint8_t ads7805ConversionStatus(void)
 {
     return gpioRead(GPIO_INPUT_ADS7805_BUSY);//0:busy, 1:ok
 }
+void ads7805StatusCB(void)
+{
 
-uint16_t ads7805GetData(void)
+}
+int16_t ads7805GetData(void)
+{
+    uint8_t idx;
+    uint16_t temp = 0;
+    clr595BufByBit(IO_EX_595_BIT1_ADS7805_BYTE);//BYTE stay low
+    update595Output();
+    for(idx = GPIO_INDEX_ADS7805_A7; idx >= GPIO_INDEX_ADS7805_A0; idx--){
+        temp |= gpioRead(raspiGpio[idx].gpio);
+        temp <<= 1;
+    }
+
+    set595BufByBit(IO_EX_595_BIT1_ADS7805_BYTE);//BYTE stay high
+    update595Output();
+    for(idx = GPIO_INDEX_ADS7805_A7; idx >= GPIO_INDEX_ADS7805_A0; idx--){
+        temp |= gpioRead(raspiGpio[idx].gpio);
+        temp <<= 1;
+    }
+    clr595BufByBit(IO_EX_595_BIT1_ADS7805_BYTE);//BYTE stay low
+    update595Output();
+
+    return (int16_t)temp;
+}
+#else
+void ads7805StartConversion(void)
+{
+	//    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc falling edge
+//    clr595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay low
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
+//    update595Output();
+//
+//    update595Output();
+//    // usleep(1);
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
+//    update595Output();
+
+}
+/* when busy is high */
+void ads7805StartOutputData(void)
+{
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//rc stay high
+//    set595BufByBit(IO_EX_595_BIT3_ADS7805_CS);//cs stay high
+//    update595Output();
+//
+//    clr595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);//cs falling edge
+//    update595Output();
+//    // usleep(1);
+//    set595BufByBit(IO_EX_595_BIT2_ADS7805_R_C);
+//    update595Output();
+}
+uint8_t ads7805ConversionStatus(void)
+{
+    return gpioRead(GPIO_INPUT_ADS7805_BUSY);//0:busy, 1:ok
+}
+void ads7805StatusCB(void)
+{
+
+}
+int16_t ads7805GetData(void)
 {
     uint8_t idx;
     uint16_t temp = 0;
@@ -134,11 +205,17 @@ uint16_t ads7805GetData(void)
         temp |= gpioRead(raspiGpio[idx].gpio);
         temp <<= 1;
     }
-    return temp;
+    clr595BufByBit(IO_EX_595_BIT1_ADS7805_BYTE);//BYTE stay low
+    update595Output();
+
+    return (int16_t)temp;
 }
+#endif
+
 
 void ads7805StateUpdate(void)
 {
+	uint8_t ret;
     switch(ads7805State){
     case ADS7805STATE_IDLE  :
     
@@ -149,17 +226,27 @@ void ads7805StateUpdate(void)
         ads7805State = ADS7805STATE_CHECK_BUSY;
     break;
     case ADS7805STATE_CHECK_BUSY:
-        if(ads7805ConversionStatus()){
+    	ret = ads7805ConversionStatus();
+    	ret = 1;
+        if( ret == 1){
             ads7805State = ADS7805STATE_OUTPUTDATA;
+            printf("7805 completed!\n");
         }
+        else{
+        	printf("7805 BUSY!\n");
+        	usleep(1000);
+        }
+
     break;
     case ADS7805STATE_OUTPUTDATA:
         ads7805StartOutputData();
+        printf("7805 OutputData!\n");
         ads7805State = ADS7805STATE_GETDATA;
     break;
     case ADS7805STATE_GETDATA:
     	ads7805DATA = ads7805GetData();
-        ads7805State = ADS7805STATE_IDLE;
+        printf("7805 GetData!\n");
+       ads7805State = ADS7805STATE_IDLE;
     break;
     default:break;
     }
@@ -188,6 +275,11 @@ uint8_t ads7805Start(void)
 		return ADS7805_OK;
 	}
 }
+uint8_t ads7805Stop(void)
+{
+	ads7805State = ADS7805STATE_IDLE;
+	return ADS7805_OK;
+}
 uint8_t ads7805Result(uint16_t * data)
 {
 	printf("ads7805State:%d\n",ads7805State);
@@ -202,7 +294,7 @@ uint8_t ads7805Result(uint16_t * data)
 void ads7805Init(void)
 {
     int err;
-
+//    gpioSetISRFunc(GPIO_INPUT_ADS7805_BUSY, 0, 10, ads7805StatusCB);
 	err = pthread_create(&ads7805Tid, NULL, (void *)ads7805StateHandler, NULL);
     if ( 0 != err ){
     	LOG_PRINT("can't create thread for oem response handler:%s\n", strerror(err));

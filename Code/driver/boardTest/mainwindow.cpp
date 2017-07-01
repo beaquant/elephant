@@ -526,7 +526,7 @@ void MainWindow::on_OUTPUT_0_clicked()
     int gpio = ui->GPIO->value();
     clrOutput(gpio);
     QString s;
-    s.sprintf("gpio=%d\n", gpio);
+    s.sprintf("gpio%d clear\n", gpio);
     ui->debugInfo->setText(s);
 
 }
@@ -536,7 +536,7 @@ void MainWindow::on_OUTPUT_1_clicked()
     int gpio = ui->GPIO->value();
     setOutput(gpio);
     QString s;
-    s.sprintf("gpio=%d\n", gpio);
+    s.sprintf("gpio%d set\n", gpio);
     ui->debugInfo->setText(s);
 }
 
@@ -562,5 +562,37 @@ void MainWindow::on_Get7805Result_clicked()
     }else{
         ui->ADS7805Status->setText("ADS7805 busy");
     }
+
+}
+
+void MainWindow::on_Stop7805_clicked()
+{
+    int ret = ads7805Stop();
+    if(ret == ADS7805_OK){
+        ui->ADS7805Status->setText("ADS7805 stop");
+    }else{
+        ui->ADS7805Status->setText("ADS7805 busy");
+    }
+
+}
+
+void MainWindow::on_ReaGpio_clicked()
+{
+    int gpio = ui->GPIO_2->value();
+    int dat = getInput(gpio);
+    int mode = getGpioMode(gpio);
+    if(dat == 0){
+        ui->INPUT_0->setChecked(true);
+//        ui->INPUT_1->setChecked(false);
+    }
+    else{
+        ui->INPUT_1->setChecked(true);
+//        ui->INPUT_0->setChecked(false);
+
+    }
+
+    QString s;
+    s.sprintf("gpio%d = %d, mode=%d\n", gpio, dat, mode);
+    ui->debugInfo->setText(s);
 
 }

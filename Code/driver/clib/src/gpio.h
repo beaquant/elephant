@@ -114,6 +114,8 @@ void setOutput(uint16_t index);
 void clrOutput(uint16_t index);
 void raspiGpioOutputCtrl(int gpio, int ctrl);
 void raspiGpioSetMode(int gpio, int mode);
+uint8_t getInput(uint16_t index);
+uint8_t getGpioMode(uint16_t index);
 
 
 #ifdef __cplusplus

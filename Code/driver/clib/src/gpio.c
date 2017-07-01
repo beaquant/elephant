@@ -31,7 +31,7 @@
 * Define section
 * add all #define here
 *****************************************************************************/
-#define     GPIO_INPUT_STEADY_FILTER        20//ms
+#define     GPIO_INPUT_STEADY_FILTER        1//ms
 
 /****************************************************************************
 * ADT section
@@ -111,6 +111,14 @@ void raspiGpioSetMode(int gpio, int mode)
     else if(mode == OUTPUT){
     	gpioSetMode(gpio,         OUTPUT);
     }
+}
+uint8_t getGpioMode(uint16_t index)
+{
+	return gpioGetMode(index);
+}
+uint8_t getInput(uint16_t index)
+{
+	return gpioRead(index);
 }
 void setOutput(uint16_t index)
 {
