@@ -57,8 +57,7 @@ enum{
 void ads7805StartConversion(void);//
 void ads7805StartOutputData(void);
 uint8_t ads7805ConversionStatus(void);
-uint16_t ads7805GetData(void);
-
+int16_t ads7805GetData(void);
 
 uint8_t ads7805Start(void);
 uint8_t ads7805Result(uint16_t * data);

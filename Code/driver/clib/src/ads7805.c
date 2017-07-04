@@ -244,7 +244,7 @@ void ads7805StateUpdate(void)
         ads7805State = ADS7805STATE_GETDATA;
     break;
     case ADS7805STATE_GETDATA:
-    	ads7805DATA = ads7805GetData();
+    	ads7805DATA = 305 * ads7805GetData() / 1000;
         printf("7805 GetData!\n");
        ads7805State = ADS7805STATE_IDLE;
     break;
