@@ -1,0 +1,263 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>实验室管理系统</title>
+    <link rel="stylesheet" type="text/css" href="/resources/js/ext-4.1.1a/resources/css/ext-all.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/BoxSelect.css"/>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="/resources/js/ext-4.1.1a/resources/css/ext-ie.css"/>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="/resources/css/ecf-backend.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/CheckHeader.css"/>
+    <script type="text/javascript" src="/resources/js/xregexp.js"></script>
+    <script type="text/javascript" src="/resources/js/ext-4.1.1a/ext-all.js"></script>
+    <script type="text/javascript" src="/resources/js/ext-4.1.1a/locale/ext-lang-zh_CN.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/resources/js/extjs-extend.js"></script>
+    <script type="text/javascript" src="/resources/js/ECF.js"></script>
+</head>
+<body style="padding:0;">
+
+<input type="hidden" id="txtCbsCfgPageSize" value="$!{pageSize}"/>
+<script type="text/javascript">
+Ext.Loader.setConfig({enabled: true}); //disableCaching:false
+Ext.Loader.setPath('ECF', 'http://$!{uriHostAndPort}');
+Ext.Loader.setPath('Ext.ux', '/resources/js/ext-4.1.1a/ux');
+Ext.require(['Ext.data.Model', 'Ext.data.Store', 'Ext.data.TreeStore'
+    , 'Ext.tab.Panel', 'Ext.panel.Panel', 'Ext.view.View', 'Ext.Viewport'
+    , 'ECF.app.enums', 'ECF.app.FormBuilder', 'ECF.app.GridBuilder', 'ECF.app.MetaBase', 'ECF.app.enums', 'ECF.app.AppBase'
+    , 'ECF.app.system.metamodel.User']);
+
+Ext.onReady(function () {
+
+    Ext.QuickTips.init();
+
+    //工作区域，使用不同tab打开不同菜单工作区
+    var tabsRegion = Ext.create('Ext.tab.Panel', {
+        region: 'center', // a center region is ALWAYS required for border layout
+        margins: '5 5 5 0', bodyPadding: 0, cls: 'frame-tab-region',
+        activeTab: 0,     // first tab initially active
+        items: [
+            {
+                contentEl: 'work-center',
+                title: '工作台'
+            }
+        ]
+    });
+
+    //菜单区域
+    var menuRegion = Ext.create('Ext.panel.Panel', {
+        region: 'west', //菜单区在viewport中靠左（西）定位
+        width: 150, margins: '5 0 5 5', cls: 'frame-menu-region',
+        header: false, //菜单区不显示标题栏
+        split: true, //将菜单区与工作区分割开来
+        collapsible: true, //显示一个收缩、展开工具条，可以将菜单区收缩、展开
+        collapseMode: 'mini', //菜单区收缩起来后，不显示标题栏（header），仅显示收缩、展开工具条
+        animCollapse: false, //菜单区收缩、展开时不使用动画效果
+        layout: 'accordion', //菜单区里面的菜单项采用折叠效果布局方式，即多个panel中，任何时刻只有一个panel处于展开状态
+        items: []
+    });
+
+    var viewport = Ext.create('Ext.Viewport', {
+        layout: 'border',
+        items: [
+            //顶部logo区域
+            Ext.create('Ext.Component', {
+                region: 'north', height: 45,
+                autoEl: {
+                    tag: 'div', cls: 'frame-top-region',
+                    html: '<div style="height:100%;float:left;"><img style="height:41px;float:left;" src="/img/logo_lms.jpg" /><h1 style="float:left;line-height:45px;margin-left:16px;">实验室管理系统</h1></div>' +
+                            '<div style="height:100%;float:right;margin-top:8px;margin-right:16px;">' +
+                            '<img id="cmd-logout" src="resources/images/log-out.png" title="退出系统" style="cursor:pointer;" />' +
+                            '</div>' +
+                            '<div style="height:100%;float:right;margin-top:8px;margin-right:16px;">' +
+                            '<img id="cmd-modifypwd" src="resources/images/cmd-lock-bk.png" title="修改密码" style="cursor:pointer;" />' +
+                            '</div>' +
+                            '<div style="height:100%;float:right;margin-top:8px;margin-right:16px;font-size: 15px;color: #fc0019">' +
+                            '欢迎您，$!{userName}' +
+                            '</div>'
+                }
+            }), menuRegion, tabsRegion
+        ]
+    });
+
+    Ext.get('cmd-logout').on('click', function () {
+        var con = new Ext.data.Connection({
+            method: 'GET', url: '/api/sys/logout'
+        });
+        ECF.request(con, {
+            scope: this, disableCaching: false,
+            success: function (result, options) {
+                window.location.href = '/login.html';
+            }
+        });
+    });
+
+    Ext.get('cmd-modifypwd').on('click', function () {
+        var required = '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>';
+        Ext.create('Ext.window.Window', {
+            title: '修改密码', id: 'window', width: 320, height: 220, modal: true,
+            items: [
+                {
+                    xtype: 'form', id: 'form', layout: 'auto', defaultType: 'textfield', bodyPadding: '0 0 0 0', height: 180,
+                    items: [
+                        {inputType: 'password', name: 'oldPassword', fieldLabel: '旧密码', labelAlign: 'right', labelWidth: 100, width: 240,
+                            afterLabelTextTpl: required, style: 'margin-top:20px'},
+                        {inputType: 'password', name: 'newPassword', fieldLabel: '新密码', labelAlign: 'right', labelWidth: 100, width: 240,
+                            afterLabelTextTpl: required, style: 'margin-top:20px'},
+                        {inputType: 'password', name: 'confirmnewPwd', fieldLabel: '再次输入新密码', labelAlign: 'right', labelWidth: 100,
+                            width: 240, afterLabelTextTpl: required, style: 'margin-top:20px'}
+                    ],
+                    buttons: [
+                        {text: '保存', icon: '/resources/images/cmd-save.png', iconCls: 'button-cmd', handler: modifyPwd },
+                        {text: '关闭', icon: '/resources/images/cmd-close.png', iconCls: 'button-cmd', handler: function () {
+                            this.up('window').close();
+                        }}
+                    ],
+                    buttonAlign: 'center'
+                }
+            ]
+        }).show();
+    });
+
+
+    function query() {
+        this.disabled = true;
+
+        this.disabled = false;
+    }
+
+    Ext.define('MenuItem', {
+        extend: 'Ext.data.Model',
+        idProperty: 'mmid',
+        fields: [
+            {name: 'miid', type: 'string'},
+            {name: 'title', type: 'string'},
+            {name: 'type', type: 'string'},
+            {name: 'data', type: 'string'}
+        ]
+    });
+
+    var con = new Ext.data.Connection({
+        method: 'GET', url: '/api/sys/menu/find/my'
+    });
+    ECF.request(con, {
+        scope: this, disableCaching: false,
+        success: function (result, options) {
+            //成功获取到登陆用户的菜单列表，将其显示在菜单区域
+            var modules = result.data;
+            ECF.menu.init(modules);
+            for (var i = 0; modules != null && i < modules.length; i++) {
+                menuRegion.add(
+                        Ext.create('Ext.panel.Panel', {
+                            title: modules[i].title, cls: 'menu-module', autoScroll: true,
+                            items: Ext.create('Ext.view.View', {
+                                cls: 'menu-item-dataview',
+                                trackOver: true, overItemCls: 'menu-item-hover',
+                                itemSelector: '.menu-item', tpl: '<tpl for="."><div class="menu-item">{title}</div></tpl>',
+                                store: Ext.create('Ext.data.Store', { model: 'MenuItem', data: modules[i].items, autoLoad: true }),
+                                listeners: { itemclick: onMenuItemClick }
+                            })})
+                );
+            }
+        },
+        failure: function () {
+            //TODO:
+        }
+    });
+
+    function modifyPwd() {
+        if (Ext.getCmp('form').getValues().oldPassword == '') {
+            Ext.Msg.alert('提示', '请输入旧密码！');
+            return;
+        }
+        if (Ext.getCmp('form').getValues().newPassword == '' || Ext.getCmp('form').getValues().confirmnewPwd == '') {
+            Ext.Msg.alert('提示', '请输入新密码！');
+            return;
+        }
+        if (Ext.getCmp('form').getValues().newPassword != Ext.getCmp('form').getValues().confirmnewPwd) {
+            Ext.Msg.alert('提示', '两次输入密码不一致，请重新输入！');
+            Ext.getCmp('form').getForm().reset();
+            return;
+        }
+        Ext.getCmp('form').submit({
+            url: '/api/sys/changePwd', method: 'POST',
+            success: function (form, action) {
+                alert('密码修改成功！');
+                Ext.getCmp('window').close();
+            },
+            failure: function (form, action) {
+                Ext.Msg.alert('提示', '密码修改失败！' + action.result.message);
+            }
+        });
+    }
+
+    function onMenuItemClick(dvItem, record, item, index, e, eOpts) {
+        if (!record || !record.getData() || (!record.getData().type || !record.getData().data)) {
+            ECF.msg.info('系统错误', '无效的菜单项设置，或者程序运行出错了');
+            return;
+        }
+        showMenuTab(record.getData());
+    }
+
+    function showMenuTab(mi) {
+        if (ECF.menu.hasOpened(mi.miid)) { //already opened, activate it
+            tabsRegion.setActiveTab(ECF.menu.getOpenMenuTab(mi.miid));
+            return;
+        }
+        if (mi.type == 'app') { //符合EIS开发规范的ExtJS应用
+            var tab = tabsRegion.add({
+                miid: mi.miid, title: mi.title, closable: true, closeAction: 'destroy', autoDestroy: true,
+                layout: 'fit', cls: 'menu-tab menu-tab-app',
+                items: [
+                    {
+                        //在tab上嵌入一个面板（panel），这个菜单功能的extjs组件都显示在这个面板上；
+                        //本来无需嵌入面板，因为很多功能界面需要显示弹出窗口，将弹出窗口显示在这个嵌入面板上，在其他功能的tab中就看不到，
+                        //   否则切换到其他菜单的tab时弹出窗口还在。
+                        xtype: 'panel', id: 'menu-frame-' + mi.miid,
+                        layout: 'fit', cls: 'menu-frame'
+                    }
+                ],
+                listeners: {
+                    close: function () {
+                        ECF.menu.closeMenu(mi.miid);
+                    }
+                }
+            });
+            ECF.menu.openMenu(mi, tab);
+            tab.show();
+            var app = Ext.create(mi.data, {});
+            app.main(tab, mi);
+            return;
+        }
+        if (mi.type == 'url') { //EIS中普通的web页面，或者外部web界面，添加菜单项时直接指定页面url即可
+            var tab = tabsRegion.add({
+                miid: mi.miid, title: mi.title, closable: true, closeAction: 'destroy', autoDestroy: true,
+                layout: 'fit', cls: 'menu-tab menu-tab-url',
+                items: [
+                    {
+                        //在tab上创建一个iframe对象，指定目标url地址；
+                        //使用了fit的布局方式，所以iframe宽、高会根据浏览器窗口大小自动调整；
+                        id: 'menu-frame-' + mi.miid,
+                        xtype: 'component', autoEl: {tag: 'iframe', src: mi.data}
+                    }
+                ],
+                listeners: {
+                    close: function () {
+                        ECF.menu.closeMenu(mi.miid);
+                    }
+                }
+            });
+            ECF.menu.openMenu(mi, tab);
+            tab.show();
+            //去掉iframe的边框
+            document.getElementById('menu-frame-' + mi.miid).setAttribute('frameborder', 0);
+        }
+    }
+});
+</script>
+
+<div id="work-center" class="x-hide-display">
+    <p>建立个人工作中心（Portal），放置个人待办事项、监控分析报表等widget。</p>
+</div>
+</body>
+</html>

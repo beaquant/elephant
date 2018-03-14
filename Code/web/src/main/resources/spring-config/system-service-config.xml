@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+    default-autowire="no">
+	
+	<bean id="systemService" class="com.djt.cbs.system.service.impl.SystemServiceImpl">
+		<property name="systemModel" ref="systemModel" />
+	</bean>
+	
+	<bean id="systemModel" class="com.djt.cbs.system.model.SystemModel">
+		<property name="userDao" ref="userDao" />
+		<property name="roleDao" ref="roleDao" />
+		<property name="menuDao" ref="menuDao" />
+		<property name="actionDao" ref="actionDao" />
+		<property name="permissionDao" ref="permissionDao" />
+		<property name="sessionDao" ref="sessionDao" />
+		<property name="accessLogDao" ref="accessLogDao" />
+	</bean>
+	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysUserDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+	<bean id="roleDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysRoleDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+	<bean id="actionDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysActionDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+	<bean id="menuDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysMenuDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+	<bean id="permissionDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysPermissionDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+	<bean id="sessionDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysSessionDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+	<bean id="accessLogDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.djt.cbs.system.dao.SysAccessLogDao" />
+		<property name="sqlSessionFactory" ref="systemSqlSessionFactory" />
+	</bean>
+</beans>

@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>试验结果数据 - 实验室管理系统</title>
+        
+        <script type="text/javascript" src="/js/jquery-1.12.1.js"></script>
+        <script type="text/javascript" src="/js/echarts/echarts.js"></script>
+		
+		<script type="text/javascript">
+            var myChart;
+            // 路径配置
+            require.config({paths: {echarts: '/js/echarts'}});
+            //动态加载模块
+            require(['echarts','echarts/chart/bar','echarts/chart/line'],function (ec) { myChart = ec.init(document.getElementById('chart')); onQuery();});
+                
+            function onQuery(){
+				// 图表清空
+				myChart.clear();
+				
+                myChart.showLoading({text: "玩命的加载中..."});
+                                                       
+                jQuery.ajax({
+                    url: "/experiment/get_experiment_data.html",
+                    data: "",
+                    type: "GET",
+                    success: function(json) {
+                        myChart.hideLoading();
+						
+						if(!json.success){
+							alert(json.error_message);
+							return;
+						}
+                        var option = {
+                            title : {
+                                text: '实验一数据动态统计'
+                            },
+                            tooltip : {
+                                trigger: 'axis',
+                                formatter: function (params) {
+                                    var res = params[0].name;
+                                    for (var i = params.length - 1; i >= 0; i--) {
+                                            res += '<br/>' + params[i].seriesName;
+                                            res += ' : ' + params[i].value;
+                                    }
+                                    return res;
+                                }
+                            },
+                            legend: {
+                                data:['数据一','数据二']
+                            },
+                            toolbox: {
+                                show : true,
+                                feature : {
+                                    mark : {show: true},
+                                    dataZoom : {show: true},
+                                    dataView : {show: true, readOnly: false},
+                                    magicType: {show: true, type: ['line', 'bar']},
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+                            dataZoom : {
+                                show : true,
+                                realtime: true,
+                                start : 50,
+                                end : 100
+                            },
+                            xAxis : [
+                                {
+                                    type : 'category',
+                                    boundaryGap : true,
+                                    axisTick: {onGap:false},
+                                    splitLine: {show:false},
+                                    data : [
+                                        "1s", "2s", "3s", "4s", "5s",
+                                        "6s", "7s", "8s", "9s", "10s", 
+                                        "11s", "12s", "13s", "14s", "15s", 
+                                        "16s", "17s", "18s", "19s", "20s",
+                                        "21s", "22s", "23s", "24s", "25s", 
+                                        "26s", "27s", "28s", "29s", "30s"
+                                    ]
+                                }
+                            ],
+                            yAxis : [
+                                {
+                                    type : 'value',
+                                    scale:true,
+                                    splitNumber: 5,
+                                    boundaryGap: [0.01, 0.01]
+                                },
+                                {
+                                    type : 'value',
+                                    scale:true,
+                                    splitNumber: 5,
+                                    boundaryGap: [0.05, 0.05]
+                                }
+                            ],
+                            series : [
+                                {
+                                    name:'数据一',
+                                    type:'line',
+                                    yAxisIndex: 1,
+                                    symbol: 'none',
+                                    data:[
+                                        8978, 8635, 7680, 5326, 4569, 
+                                        5678, 8945, 2568, 5689, 5678, 
+                                        5642, 5646, 7890, 4568, 9820, 
+                                        6868, 5678, 8768, 6789, 8654, 
+                                        6890, 8965, 6845, 7890, 7685, 
+                                        6687, 6825, 3452, 6845, 6854
+                                    ],
+                                    markPoint : {
+                                        symbol: 'emptyPin',
+                                        itemStyle : {
+                                            normal : {
+                                                color:'#1e90ff',
+                                                label : {
+                                                    show:true,
+                                                    position:'top'
+                                                }
+                                            }
+                                        },
+                                        data : [
+                                            {type : 'max', name: '最大值', symbolSize:5},
+                                            {type : 'min', name: '最小值', symbolSize:5}
+                                        ]
+                                    }
+                                },
+                                {
+                                    name:'数据二',
+                                    type:'line',
+                                    yAxisIndex: 1,
+                                    symbol: 'none',
+                                    data:[
+                                        5978, 5635, 3680, 6326, 7569, 
+                                        2678, 6945, 4568, 6689, 8678, 
+                                        2642, 2646, 2890, 4568, 2820, 
+                                        2868, 3678, 5768, 2789, 2654, 
+                                        3890, 3965, 2845, 3890, 2685, 
+                                        3687, 3825, 3452, 3845, 2854
+                                    ],
+                                    markPoint : {
+                                        symbol: 'emptyPin',
+                                        itemStyle : {
+                                            normal : {
+                                                color:'#1e90ff',
+                                                label : {
+                                                    show:true,
+                                                    position:'top'
+                                                }
+                                            }
+                                        },
+                                        data : [
+                                            {type : 'max', name: '最大值', symbolSize:5},
+                                            {type : 'min', name: '最小值', symbolSize:5}
+                                        ]
+                                    }
+                                }
+                            ]
+                        };
+                                            
+                        myChart.setOption(option);                                                                  
+                    },
+					error:function(json) {
+						alert("服务器繁忙，请稍后再试。");
+					}
+                });
+                
+            }
+			
+			var timeTicket;
+            var axisData;
+			var lastAxis=30;
+            clearInterval(timeTicket);
+            timeTicket = setInterval(function (){
+                lastAxis += 1; 
+                
+               // 动态数据接口 addData
+                myChart.addData([
+                    [
+                        0,        // 系列索引
+                        Math.round(Math.random() * 10000), // 新增数据
+                        false,     // 新增数据是否从队列头部插入
+                        false     // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+                    ],
+                    [
+                        1,        // 系列索引
+                        Math.round(Math.random() * 5000), // 新增数据
+                        false,    // 新增数据是否从队列头部插入
+                        false,    // 是否增加队列长度，false则自定删除原有数据，队头插入删队尾，队尾插入删队头
+						lastAxis+"s"
+                    ]
+                ]);
+               
+            }, 2100);
+    	</script>
+    </head>
+    <body>
+        <div id="content" class="span10">
+            <div class="row-fluid sortable ui-sortable">
+                <div class="box span12">
+                    <div data-original-title="" class="box-header well">
+                        <h2>实验数据统计</h2>
+                    </div>
+                    <div class="box-content">
+                        <div role="grid" class="dataTables_wrapper" id="DataTables_Table_0_wrapper">
+                            <div class="row-fluid">
+                                <div id="chart" style="height:400px;float:left;width:98%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

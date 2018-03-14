@@ -1,0 +1,127 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>实验室管理系统 - 登录</title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	
+	<style>
+	*{ padding:0; margin:0}
+	body{ background:#f2f2f2; max-width:640px; margin:0 auto}
+    .row-fluid .login-header{ background:#ba252c; color:#fff; height:60px; line-height:60px; text-align:center; font-size:14px; font-weight:600;}
+    .row-fluid .input-prepend{ width:100%; margin-top:10px; position:relative}
+	.row-fluid .input-prepend .input-large{ height:45px; border:1px solid #ddd; width:100%; padding-left:40px; box-sizing:border-box}
+	.row-fluid .input-prepend i.icon-user{ display:inline-block; background: url(/img/icon-b7.png) no-repeat; height:20px; width:20px; position:absolute; background-size:20px auto; top:10px;left:7px;}	
+	.row-fluid .input-prepend i.icon-lock{ display:inline-block; background: url(/img/icon-b8.png) no-repeat; height:25px; width:25px; position:absolute; background-size:20px auto; top:7px;left:7px;}	
+	.row-fluid .input-prepend span.yzm{ position:absolute;top:0px; right:0; width:110px; border-left:1px solid #ddd; display:block; height:45px;}
+	.row-fluid .input-prepend span.yzm img{ margin-top:4px;width:100px;}
+	.row-fluid .input-prepend .input-largea{ height:45px; border:1px solid #ddd; width:100%; padding-left:10px; box-sizing:border-box}
+	.row-fluid .user-bot{display:-webkit-box}
+	.row-fluid .user-bot button{-webkit-box-flex:1; background:#ba252c; border:none; height:45px; line-height:40px;  color:#fff; font-weight:bold; margin:10px auto; width:98%; display:block;}
+    </style>
+	
+	<script type="text/javascript" src="/js/jquery-1.12.1.js"></script>
+	
+    <script type="text/javascript">
+		$(document).ready(function(){
+			$("#randomCode").val("");
+		    $("#username,#password,#randomCode").keydown(function(e){
+                if(e.keyCode==13){
+                	$("#btlogin").click();          
+                }           
+            });
+    		$("#btlogin").click(function(e){
+    			var loginId = $("#username").val();
+        		var password = $("#password").val();
+        		var randomCode = $("#randomCode").val();
+        		if(!loginId || loginId.length<=0){
+					e.preventDefault();
+					alert("用户名不能为空！");
+        			$("#username").focus();
+        			return;
+        		}
+        		if(!password || password.length<=0){
+					e.preventDefault();
+					alert("密码不能为空！");
+        			$("#password").focus();
+        			return;
+        		}
+        		if(!randomCode || randomCode.length<=0){
+					e.preventDefault();
+					alert("验证码不能为空！");
+        			$("#randomCode").focus();
+        			return;
+        		}
+				jQuery.ajax({
+        			url:"/api/sys/login",
+					type:"POST",
+					data:{loginId:loginId,password:password,randomCode:randomCode},
+        			success:function(jason){
+						if(jason.success){
+							window.location.href = "/index.html";
+						}
+						else{
+							e.preventDefault();
+							alert(jason.message);
+					$("#dialog").dialog();
+        					$("#randomImg").attr("src","imageServlet?"+Math.random());
+                			return;
+						}
+        			},
+					error:function(xml){
+						e.preventDefault();
+						alert(xml.responseText);
+						jason.message
+    					$("#randomImg").attr("src","imageServlet?"+Math.random());
+            			return;
+					}
+        		});
+    		});			
+		});
+		
+		function refresh(obj) {
+        	obj.src = "imageServlet?"+Math.random();
+    	}
+	</script>
+</head>
+<body style="padding:0;margin-top:100px;">
+	<div class="container-fluid">
+		<div class="row-fluid">		
+			<div class="row-fluid">
+				<div class="login-header">
+					<h2>欢迎来到实验室管理系统</h2>
+				</div><!--/span-->
+			</div><!--/row-->			
+			<div class="row-fluid">
+				<div class="well span5 center login-box">
+					<form class="form-horizontal" action="http://cbs.dajiantuan.com/index.html" method="post">
+					
+							<div class="input-prepend" title="用户名" data-rel="tooltip">
+								<i class="icon-user"></i><input autofocus class="input-large" name="username" id="username" type="text" value="" placeholder="请输入用户名">
+							</div>
+							<div class="clearfix"></div>
+
+							<div class="input-prepend" title="密码" data-rel="tooltip">
+								<i class="icon-lock"></i><input class="input-large" name="password" id="password" type="password" value="" placeholder="请输入密码">
+							</div>						
+							<div class="clearfix"></div>
+
+							<div class="input-prepend" title="请输入验证码" data-rel="tooltip">
+								<input class="input-largea" type="text" name="randomCode" id="randomCode" value="" placeholder="请输入验证码"><span class="yzm"><img title="点击更换" id="randomImg" name="randomImg" onclick="javascript:refresh(this);" src="imageServlet"></span> 
+							</div>
+							<div class="clearfix"></div>
+
+							<p class="user-bot">
+                            <button id="btlogin" type="button" class="btn ">登陆</button>												
+							</p>
+						
+					</form>
+				</div><!--/span-->
+			</div><!--/row-->
+		</div><!--/fluid-row-->		
+	</div><!--/.fluid-container-->
+</body>
+</html>

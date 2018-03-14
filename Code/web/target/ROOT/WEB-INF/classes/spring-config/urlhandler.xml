@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd    
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       default-autowire="byName">
+    <context:component-scan base-package="com.djt.cbs" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </context:component-scan>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为20MB -->
+        <property name="maxUploadSize">
+            <value>20971520</value>
+        </property>
+    </bean>
+    <bean id="velocityConfig"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="configLocation" value="/WEB-INF/classes/conf/velocity.properties"/>
+        <property name="resourceLoaderPath" value="/WEB-INF/templates/"/>
+    </bean>
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType">
+            <value>text/html;charset=utf-8</value>
+        </property>
+        <property name="viewClass" value="com.djt.cbs.web.util.VelocityToolboxView20"/>
+        <property name="toolboxConfigLocation">
+            <value>/WEB-INF/classes/velocity-tools.xml</value>
+        </property>
+        <property name="dateToolAttribute" value="date"/>
+        <property name="numberToolAttribute" value="number"/>
+    </bean>
+
+    <bean id="xmlviewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="suffix" value=".xml.vm"/>
+        <property name="contentType">
+            <value>text/xml;charset=utf-8</value>
+        </property>
+    </bean>
+
+    <bean id="validator1"
+          class="com.djt.cbs.web.util.MyConfigurableWebBindingInitializer">
+        <property name="validator" ref="springValidator"/>
+    </bean>
+    <bean id="jacksonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+    <bean
+            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="webBindingInitializer">
+            <ref bean="validator1"/>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <ref bean="jacksonMessageConverter"/>
+                <bean
+                        class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean id="jsonHttpMessageConverter"
+                      class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/plain;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="springValidator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+</beans>

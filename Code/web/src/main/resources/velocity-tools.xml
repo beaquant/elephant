@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<tools>
+	<toolbox scope="application">
+		<tool class="com.djt.cbs.web.util.VelocityUtil" key="utils" />
+	</toolbox>
+	<data type="String" key="uriHostAndPort" value="${pom.uri-host-and-port}" />
+</tools>

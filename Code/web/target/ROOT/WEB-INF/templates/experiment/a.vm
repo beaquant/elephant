@@ -1,0 +1,19 @@
+stop:function(event,ui){
+
+
+              // 让自定义试验可以排序
+              $zdysy.sortable({
+                                cursor: "move",
+                                revert: true,
+								stop: function(event,ui){
+                              		alert(ui.item.attr("id"));
+                                    var buttonLength = $("a", ui.item).length;
+                                    if(buttonLength==0){
+                                        var deleteButton = "<a href='javascript:void();' title='设置' class='ui-icon-delete'>设置</a><a href='#' onClick='removeOperation(this)' title='删除' class='ui-icon-delete'>删除</a>";
+                                        ui.item.append(deleteButton);
+                                    }
+                                }
+                              });
+            
+             
+              } );

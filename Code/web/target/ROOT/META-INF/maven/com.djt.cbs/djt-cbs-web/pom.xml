@@ -1,0 +1,292 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- this is a test -->
+    <parent>
+        <groupId>com.djt</groupId>
+        <artifactId>djt-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>com.djt.cbs</groupId>
+    <artifactId>djt-cbs-web</artifactId>
+    <packaging>war</packaging>
+    <version>1.5.1-SNAPSHOT</version>
+    <name>djt-cbs-web</name>
+    <url>http://maven.apache.org</url>
+
+
+    <dependencies>
+        <!-- djt -->
+        <dependency>
+            <groupId>com.djt</groupId>
+            <artifactId>djt-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.djt</groupId>
+            <artifactId>djt-core</artifactId>
+        </dependency>
+       
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- thumbnail utility -->
+        <dependency>
+  			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>[0.4, 0.5)</version>
+		</dependency>
+
+        <!-- ali dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <!-- srping -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+
+        <!-- velocity -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-tools</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+
+        <!-- database -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+
+        <!-- excel -->
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+        
+        <!-- user agent 插件 -->
+		<dependency>
+			<groupId>nl.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+    </dependencies>
+
+    <build>
+        <finalName>ROOT</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>*/*</include>
+                    <include>*/*/*</include>
+                    <include>*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.0.0.M2</version>
+                <configuration>
+                    <webApp>${basedir}/target/${project.build.finalName}.war</webApp>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
+                    <!--<webDefaultXml>${basedir}/src/main/resources/webdefault.xml</webDefaultXml>-->
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8080</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${version-maven-release-plugin}</version>
+                <configuration>
+                    <tagBase>http://scm.djt.dev:8000/svn/dev/djt-cbs/cbs-web/tags</tagBase>
+                    <branchBase>http://scm.djt.dev:8000/svn/dev/djt-cbs/cbs-web/branches</branchBase>
+                    <tagNameFormat>@{version}</tagNameFormat>
+                    <username>${scm.username}</username>
+                    <password>${scm.password}</password>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <connection>scm:svn:http://scm.djt.dev:8000/svn/dev/djt-cbs/cbs-web/trunk</connection>
+        <developerConnection>scm:svn:http://scm.djt.dev:8000/svn/dev/djt-cbs/cbs-web/trunk</developerConnection>
+        <url>http://scm.djt.dev:8000/svn/dev/djt-cbs/cbs-web/trunk</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Internal Release Repository</name>
+            <url>http://repo.djt.dev/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Internal Snapshot Repository</name>
+            <url>http://repo.djt.dev/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>prd</id>
+            <properties>
+                <dubbo.registry.address>zookeeper://127.0.0.1:2181</dubbo.registry.address>
+
+                <pom.uri-host-and-port>www.lms.com:8080</pom.uri-host-and-port>
+                <pom.cookie-domain>www.lms.com</pom.cookie-domain>            
+                               
+                <pom.log.file>/home/logs/lms-web.log</pom.log.file>
+                <pom.log.root.level>info</pom.log.root.level>
+                <pom.log.root.name>admin-log</pom.log.root.name>               
+                
+                <pom.jdbc.lms.url>jdbc:mysql://127.0.0.1:3306/js_lms?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.lms.url>
+                <pom.jdbc.lms.username>root</pom.jdbc.lms.username>
+                <pom.jdbc.lms.password>root</pom.jdbc.lms.password>
+                
+            </properties>
+        </profile>
+        <profile>
+            <id>pre</id>
+            <properties>
+                <dubbo.registry.address>zookeeper://127.0.0.1:2181</dubbo.registry.address>
+
+                <pom.uri-host-and-port>106.15.184.14</pom.uri-host-and-port>
+                <pom.cookie-domain>106.15.184.14</pom.cookie-domain>            
+                               
+                <pom.log.file>/hzh/logs/lms-web.log</pom.log.file>
+                <pom.log.root.level>info</pom.log.root.level>
+                <pom.log.root.name>admin-log</pom.log.root.name>               
+                
+                <pom.jdbc.lms.url>jdbc:mysql://127.0.0.1:3306/js_lms?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.lms.url>
+                <pom.jdbc.lms.username>root</pom.jdbc.lms.username>
+                <pom.jdbc.lms.password>hzh@1324</pom.jdbc.lms.password>
+                
+            </properties>
+        </profile>
+        <profile>
+            <id>Benio</id>
+            <properties>
+                <dubbo.registry.address>zookeeper://127.0.0.1:2181</dubbo.registry.address>
+
+                <pom.uri-host-and-port>127.0.0.1:8080</pom.uri-host-and-port>
+                <pom.cookie-domain>127.0.0.1</pom.cookie-domain>            
+                               
+                <pom.log.file>/Users/benio/Documents/app/logs/cbs-web.log</pom.log.file>
+                <pom.log.root.level>info</pom.log.root.level>
+                <pom.log.root.name>admin-log</pom.log.root.name>               
+                
+                <pom.jdbc.lms.url>jdbc:mysql://127.0.0.1:3306/js_lms?characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull</pom.jdbc.lms.url>
+                <pom.jdbc.lms.username>root</pom.jdbc.lms.username>
+                <pom.jdbc.lms.password>dev</pom.jdbc.lms.password>
+                
+            </properties>
+        </profile>
+
+    </profiles>
+</project>

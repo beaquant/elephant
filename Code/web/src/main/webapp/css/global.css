@@ -1,0 +1,188 @@
+﻿body
+{
+    margin:0;
+	padding:0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-color:#ffffff;
+}
+a:link
+{
+	color: #000000;
+	text-decoration: none;
+}
+a:visited
+{
+	color: #000000;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #006CD9;
+	text-decoration:underline;
+}
+.input
+{
+	border: solid 1px #999999;
+	width: 200px;
+	height: 18px;
+}
+.checkbox
+{
+    border: solid 1px #999999;
+}
+.select
+{
+    border: solid 1px #999999;
+}
+#main
+{
+    width:98%;
+    margin:0 auto 0 auto;
+    min-height:300px;
+}
+#pageTitle
+{	
+	background:url(../images/icon_arrow.gif) no-repeat 0px 50%;
+	margin:10px 0px 10px 5px;
+	padding-left:18px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.pageTitle
+{	
+	background:url(../images/icon_arrow.gif) no-repeat 0px 50%;
+	margin:10px 0px 10px 5px;
+	padding-left:18px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.pageTitle a
+{
+	font-size:14px;
+	font-weight:normal;
+	color: #006CD9;
+	margin: 0 4px;
+}
+#pageNote
+{
+    color: #ff0000; 
+    margin:10px 0px 10px 5px;   
+}
+.mustFeild
+{
+    color: #ff0000; 
+}
+.tableStyle
+{
+    width:100%;
+	background-color: #cccccc;
+}
+.tableStyle a
+{
+	color: #006CD9;
+	margin: 0 4px;
+}
+.tableStyle td
+{
+	background-color: #ffffff;
+	padding:5px;
+}
+.tableHeader
+{
+	font-weight: bold;
+	background:url(../images/table-header-bg.jpg);
+	color: #545454;
+	height:26px;
+}
+.tableHeader td
+{
+	background:url(../images/table-header-bg.jpg);
+	padding:0 5px 0 5px;
+}
+.tableItem
+{
+	height:26px;
+}
+.tableAlternatingItem
+{
+    color: #000000;
+	background-color: #eeeeee;
+	height:26px;
+}
+.tableAlternatingItem td
+{
+	background-color: #eeeeee;
+}
+.button
+{
+    cursor:pointer;  
+    border:none;  
+    margin:0 2px;
+}
+.notice
+{
+    border:solid 1px #eeeeee;
+    margin:5px 0 5px 0;
+    padding:5px;    
+}
+.note{margin-left:5px; color:#ff0000;}
+.pager
+{
+	height:30px;
+	line-height:30px;
+}
+.pagerLeft
+{
+	text-align:right;	
+}
+.pager img
+{
+	border:none; 
+	vertical-align:middle;
+}
+.pager a
+{
+	padding:0 5px;
+}
+.PagerNumbericButton a
+{
+    margin:0px 8px 0 8px; 
+}
+.deleted
+{
+    color:#999999;    
+}
+/*==========以下部分是Validform必须的===========*/
+.Validform_checktip{
+	margin-left:8px;
+	line-height:20px;
+	height:20px;
+	overflow:hidden;
+	color:#999;
+	font-size:12px;
+}
+.Validform_right{
+	color:#71b83d;
+	padding-left:20px;
+	background:url(../images/right.png) no-repeat left center;
+}
+.Validform_wrong{
+	color:red;
+	padding-left:20px;
+	white-space:nowrap;
+	background:url(../images/error.png) no-repeat left center;
+}
+.Validform_loading{
+	padding-left:20px;
+	background:url(../images/onLoad.gif) no-repeat left center;
+}
+.Validform_error{
+	background-color:#ffe7e7;
+}
+#Validform_msg{color:#7d8289; font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif; width:280px; -webkit-box-shadow:2px 2px 3px #aaa; -moz-box-shadow:2px 2px 3px #aaa; background:#fff; position:absolute; top:0px; right:50px; z-index:99999; display:none;filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999999');}
+#Validform_msg .iframe{position:absolute; left:0px; top:-1px; z-index:-1;}
+#Validform_msg .Validform_title{line-height:25px; height:25px; text-align:left; font-weight:bold; padding:0 8px; color:#fff; position:relative; background-color:#000;}
+#Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{line-height:22px; position:absolute; right:8px; top:0px; color:#fff; text-decoration:none;}
+#Validform_msg a.Validform_close:hover{color:#cc0;}
+#Validform_msg .Validform_info{padding:8px;border:1px solid #000; border-top:none; text-align:left;}

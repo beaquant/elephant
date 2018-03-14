@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>实验室管理系统</title>
+    <style>
+        html, body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #wraper{
+            height: 100%;
+        }
+        #hMenu{
+            height: 54px;
+            background:#fcfcfc; /* 一些不支持背景渐变的浏览器 */  
+            background:-moz-linear-gradient(top, #fcfcfc, rgba(240, 240, 240, 1.0));  
+            background:-webkit-gradient(linear, 0 0, 0 bottom, from(#fcfcfc), to(rgba(240, 240, 240, 1.0)));  
+            background:-o-linear-gradient(top, #fcfcfc, rgba(240, 240, 240, 1.0)); 
+        }
+        #hMenu .logo{
+            padding-top: 8px;
+            width: 172px;
+            float: left;
+        }
+        #hMenu .menu{
+            padding: 20px 0 0 14px;
+            float: left;
+            color:#484b52;
+        }
+        #hMenu .menu span{
+            display: block;
+            float: left;
+            width: 60px;
+            text-align: center;
+        }
+        #hMenu .login_status{
+            float: right;
+            width: 160px;
+            padding: 16px 20px 0 0;
+            text-align: right;
+        }
+        #hMenu .login_status .user{
+            text-decoration: none;
+        }
+        #hMenu .login_status .user img{
+            float: left;
+            margin-right: 8px;
+        }
+        #hMenu .login_status .user span{
+            margin-top: 5px;
+            float: left;
+            display: inline-block;
+        }
+        #hToolbar{
+            height: 48px;
+            background-color: #33363f;
+        }
+        #hToolbar ul{
+            list-style: none;
+            margin: 0 0 0 200px;
+            padding: 0;
+        }
+        #hToolbar ul li{
+            float: left;
+            width: 48px;
+            height: 48px;
+        }
+        #hToolbar ul li img{
+            margin-top: 12px;
+        }
+        #main{
+            height: calc(100% - 102px);       
+        }
+        #mLeft{
+            float: left;
+            width: 136px;
+            background-color: #33363f;
+        }
+        #mLeft ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #mLeft ul li{
+            padding: 10px 0 10px 0;
+            text-align: center;
+        }
+        #mLeft ul li a{
+            text-decoration-line: none;
+        }
+        #mLeft ul li img{
+            width: 72px;
+        }
+        #mLeft ul li span{
+            margin:0 auto;
+            display: block;
+            line-height: 32px;
+            color: #f6f6f6;
+        }
+        #mLeft ul li.current span{
+            color: #24d4bf;
+        }
+        #mRight{
+            float: right;
+            width: calc(100% - 136px);
+            background-color: #eeeeee;
+        }
+        #mRight ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #mRight ul li{
+            margin: 8px 12px 8px 12px;
+            float:left;
+            width: 350px;
+            height: 365px;
+            background-color:#ffffff;
+            text-align: center;
+            border-top-left-radius:8px;
+            border-top-right-radius:8px;
+            border-bottom-left-radius:8px;
+            border-bottom-right-radius:8px;
+            -moz-border-radius-topleft:8px;
+            -moz-border-radius-topright:8px;
+            -moz-border-radius-bottomleft:8px;
+            -moz-border-radius-bottomright:8px;
+            -webkit-border-top-left-radius:8px;
+            -webkit-border-top-right-radius:8px;
+            -webkit-border-bottom-left-radius:8px;
+            -webkit-border-bottom-right-radius:8px;
+        }
+        #mRight ul li a{
+            text-decoration-line: none;
+        }
+        #mRight ul li img{
+            margin: 72px 0 0 0;
+        }
+        #mRight ul li span{
+            margin:0 auto;
+            display: block;
+            line-height: 48px;
+            color: #26d3c0;
+        }
+        #mRight ul li.glj{
+            background:url(/img/main/glj-bj.png) -10px 60px no-repeat #ffffff;
+        }
+        #mRight ul li.zpj{
+            background:url(/img/main/zpj-bj.png) 0px 60px no-repeat #ffffff;
+        }
+        #mRight ul li.yzj{
+            background:url(/img/main/yzj-bj.png) -20px 60px repeat-x #ffffff;
+        }
+        #mRight ul li.zpjjx{
+            background:url(/img/main/zpjjx-bj.png) 0px 50px no-repeat #ffffff;
+        }
+        #mRight ul li.yzjjx{
+            background:url(/img/main/yzjjx-bj.png) 0px 50px no-repeat #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div id="wraper">
+        <div id="header">
+            <div id="hMenu">
+                <div class="logo"><img src="/img/logo.jpg" /></div>
+                <div class="menu"><span>文件</span><span>实验</span><span>窗口</span><span>帮助</span></div>
+                <div class="login_status"><a class="user" href="#"><img src="/img/man-ico.png" /><span>用户</span></a><img src="/img/gear-ico.png" /></div>
+            </div>
+            <div id="hToolbar">
+                <ul>
+                    <li><a href="#"><img src="/img/toolbar/folder.png" title="打开" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/save.png" title="保存" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/redo.png" title="撤销" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/pie.png" title="统计图" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/print.png" title="打印" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/test_tube.png" title="试验" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/device.png" title="设备" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/scan.png" title="扫描" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/line.png" title="线条统计图" /></a></li>
+                    <li><a href="#"><img src="/img/toolbar/lift.png" title="升降机" /></a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <div id="mLeft">
+                <ul>
+                    <li class="current"><a href="#"><img src="/img/menu/qxdj-s.png" /><span>清洗电极</span></a></li>
+                    <li><a href="#"><img src="/img/menu/ceshi.png" /><span>测量</span></a></li>
+                    <li><a href="#"><img src="/img/menu/sjtj.png" /><span>数据统计</span></a></li>
+                    <li><a href="#"><img src="/img/menu/sjtj1.png" /><span>数据统计1</span></a></li>
+                    <li><a href="#"><img src="/img/menu/jgjs.png" /><span>结果计算</span></a></li>
+                    <li><a href="#"><img src="/img/menu/kjfs.png" /><span>快捷方式</span></a></li>
+                </ul>
+            </div>
+            <div id="mRight">
+                <ul>
+                    <li class="glj"><a href="#"><img src="/img/main/glj.png" /><span>光亮剂测试</span></a></li>
+                    <li class="zpj"><a href="#"><img src="/img/main/zpj.png" /><span>整平剂测试</span></a></li>
+                    <li class="yzj"><a href="#"><img src="/img/main/yzj.png" /><span>抑制剂测试</span></a></li>
+                    <li class="zpjjx"><a href="#"><img src="/img/main/zpj.png" /><span>整平剂基线</span></a></li>
+                    <li class="yzjjx"><a href="#"><img src="/img/main/yzj.png" /><span>抑制剂基线</span></a></li>
+                    <li><a href="#"><img src="/img/main/qxdianji.png" /><span>清洗电极</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

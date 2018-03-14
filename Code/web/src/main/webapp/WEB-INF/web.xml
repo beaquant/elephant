@@ -1,0 +1,164 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>大件团购网 CBS - 大件团购网核心业务系统</display-name>
+
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/log4j.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>cbs-web-branch</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    
+    <filter>
+        <filter-name>secretFilter</filter-name>
+        <filter-class>com.djt.cbs.web.util.SecretFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>com.djt.cbs.web.util.AuthenticationFilter</filter-class>
+        <init-param>
+            <param-name>excludes</param-name>
+            <!-- 多个url之间的分隔符，可以使用：, ; | -->
+            <param-value>/api/sys/login;/api/sys/logout</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>secretFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/index.html</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/group_city/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/group_purchase/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/member/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/member_entered/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/member_return/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/member_to_return/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/workbench/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/member_group/*</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/inviter/*</url-pattern>
+    </filter-mapping>
+    
+   	<filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/bdata/*</url-pattern>
+    </filter-mapping>
+    
+   	<filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/group_order/*</url-pattern>
+    </filter-mapping>
+    
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>cbs-servlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-config/*.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>image-servlet</servlet-name>
+        <servlet-class>com.djt.cbs.web.util.ImageServlet</servlet-class>
+    </servlet>
+
+	<servlet-mapping>
+		<servlet-name>image-servlet</servlet-name>
+		<url-pattern>/imageServlet</url-pattern>
+	</servlet-mapping>
+    
+    <servlet-mapping>       
+	    <servlet-name>default</servlet-name>    
+	    <url-pattern>*.js</url-pattern>  
+	    <url-pattern>*.css</url-pattern>
+	    <url-pattern>*.jpg</url-pattern> 
+	    <url-pattern>*.jpeg</url-pattern>
+	    <url-pattern>*.png</url-pattern>
+	    <url-pattern>*.bmp</url-pattern>
+	    <url-pattern>*.gif</url-pattern>
+	    <url-pattern>*.htm</url-pattern> 
+	    <url-pattern>*.ico</url-pattern>     
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>cbs-servlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>login</welcome-file>
+    </welcome-file-list>
+</web-app>
