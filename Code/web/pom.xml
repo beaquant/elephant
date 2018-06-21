@@ -239,7 +239,7 @@
                 <dubbo.registry.address>zookeeper://127.0.0.1:2181</dubbo.registry.address>
 
                 <pom.uri-host-and-port>www.lms.com:8080</pom.uri-host-and-port>
-                <pom.cookie-domain>www.lms.com</pom.cookie-domain>            
+                <pom.cookie-domain>helloss.top</pom.cookie-domain>            
                                
                 <pom.log.file>/home/logs/lms-web.log</pom.log.file>
                 <pom.log.root.level>info</pom.log.root.level>
@@ -256,8 +256,8 @@
             <properties>
                 <dubbo.registry.address>zookeeper://127.0.0.1:2181</dubbo.registry.address>
 
-                <pom.uri-host-and-port>106.15.184.14</pom.uri-host-and-port>
-                <pom.cookie-domain>106.15.184.14</pom.cookie-domain>            
+                <pom.uri-host-and-port>helloss.top</pom.uri-host-and-port>
+                <pom.cookie-domain>helloss.top</pom.cookie-domain>            
                                
                 <pom.log.file>/hzh/logs/lms-web.log</pom.log.file>
                 <pom.log.root.level>info</pom.log.root.level>
